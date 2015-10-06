@@ -1,8 +1,11 @@
 /.DS_STORE
 .DS_Store
 .gradle/
+.gradle/*
 .idea/
+.idea/*
 .idea/gradle.xml
 .idea/workspace.xml
 build/
+build/*
 local.properties
