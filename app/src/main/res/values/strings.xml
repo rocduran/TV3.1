@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">RocMoi</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_enquesta_detail">Enquesta Detail</string>
 </resources>
