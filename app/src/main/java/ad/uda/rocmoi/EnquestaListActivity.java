@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.KeyEvent;
 import android.view.View;
 
 
@@ -94,5 +95,16 @@ public class EnquestaListActivity extends AppCompatActivity
             detailIntent.putExtra(EnquestaDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
         }
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        //Envia a Activitat per realitzar enquesta
+        if (keyCode == KeyEvent.KEYCODE_0 || keyCode==KeyEvent.KEYCODE_VOLUME_UP)
+        {
+            startActivity(new Intent("ad.uda.rocmoi.Enquesta"));
+        }
+
+        return false;
+
     }
 }
