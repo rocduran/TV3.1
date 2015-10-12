@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".EnquestaListActivity"
+            android:name=".activities.EnquestaListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EnquestaDetailActivity"
+            android:name=".activities.EnquestaDetailActivity"
             android:label="@string/title_enquesta_detail"
-            android:parentActivityName=".EnquestaListActivity"
+            android:parentActivityName=".activities.EnquestaListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".EnquestaListActivity" />
+                android:value=".activities.EnquestaListActivity" />
         </activity>
     </application>
 

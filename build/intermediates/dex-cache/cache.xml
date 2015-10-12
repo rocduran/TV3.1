@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/pre-dexed/debug/classes-48cf4d0240299fb6ae5216ba6da3be71d1eef938.jar" />
-    </item>
-    <item
-        jar="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="C:\AP\TV3.1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/pre-dexed/debug/classes-77a6367176eb9174f4d068f3a1b541c6d4cdd99e.jar" />
+        <dex dex="C:\AP\TV3.1\app\build\intermediates\pre-dexed\debug\classes-f78f9e2ec7ec18b9a82accfc72c6d0a7c8dbf2d5.jar" />
     </item>
     <item
-        jar="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/pre-dexed/debug/classes-38578d1ff7a59da227a29355b25fa25b3f403550.jar" />
-    </item>
-    <item
-        jar="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="C:\AP\TV3.1\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-e810eb158dd60021beea772cea9f895630ef6094.jar" />
+        <dex dex="C:\AP\TV3.1\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-1180b9c039fd8dbc8c1fb1af1b3e4d7430b08898.jar" />
     </item>
     <item
-        jar="/Users/rocduran/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="C:\AP\TV3.1\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\AP\TV3.1\app\build\intermediates\pre-dexed\debug\classes-d6335f1699b3c898a9b05b9efa7878abe94cc9d0.jar" />
+    </item>
+    <item
+        jar="C:\AP\TV3.1\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="C:\AP\TV3.1\app\build\intermediates\pre-dexed\debug\classes-a4c0230ea7c1edb891fff62be63bc5ae90b26ac1.jar" />
+    </item>
+    <item
+        jar="C:\Programas\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/rocduran/Documents/Apunts/3r/EP2/Activitats MX Miki AndroidStudio/RocMoi/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-d6ab0eda316daab51139b519a2755900576c9a64.jar" />
+        <dex dex="C:\AP\TV3.1\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-8b56991c87729dc9eaf3a2f6dbe697a6ad826c61.jar" />
     </item>
 
 </items>
