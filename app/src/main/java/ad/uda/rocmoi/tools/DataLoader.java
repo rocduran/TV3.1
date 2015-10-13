@@ -141,7 +141,6 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
                 //els parametres a valorar de cada enquesta
                 Valoracio valAtv = crearValoracion(vala);
 
-
                 //Creem el handler i l'afegim a la llista
                 Enquesta enquesta = new Enquesta(id, preu, desc, hotel, guia, atv, valHotel, valGuia, valAtv);
                 enquestes.add(enquesta);
@@ -156,8 +155,8 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
 
     private Valoracio crearValoracion(String[] vals) {
         Valoracio valoracions = new Valoracio();
-        for (int i = 0; i < vals.length; i++) {
-            valoracions.add(new Parametre(vals[i], -1));
+        for (String val : vals) {
+            valoracions.add(new Parametre(val, -1));
         }
         return valoracions;
     }
