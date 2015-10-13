@@ -27,6 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.EnquestaListActivity" />
         </activity>
+        <activity android:name=".activities.Enquesta" >
+            <intent-filter>
+                <action android:name="ad.uda.rocmoi.Enquesta" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
