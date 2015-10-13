@@ -3,18 +3,13 @@ package ad.uda.rocmoi.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.text.Layout;
+import android.util.Log;
 import android.view.View;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ad.uda.rocmoi.R;
+
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.dummy.DummyContent;
 import ad.uda.rocmoi.pojos.Enquesta;
@@ -84,8 +79,20 @@ public class EnquestaListFragment extends ListFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO cambiar les 6 linies a continuacio per a la carrega de les dades de la BD
-        Enquesta e1 = new Enquesta(1, "enquesta 1");
+
+        //Definició dels elements necessaris
+        enquestes =new ArrayList<Enquesta>();
+
+        //Adapter (inicialment buid)
+        adaptador =new EnquestaAdapter(getActivity(), enquestes);
+        setListAdapter(adaptador);
+        //Gestor asyncron per recuperar dades i presentar la informació
+        //Quan es rebi
+        DataLoader dl = new DataLoader(getActivity(),  adaptador);
+        dl.execute();
+        Log.d("AAAH","aH");
+
+        /*Enquesta e1 = new Enquesta(1, "enquesta 1");
         Enquesta e2 = new Enquesta(2, "enquesta 2");
         Enquesta e3 = new Enquesta(3, "enquesta 3");
 
@@ -108,7 +115,7 @@ public class EnquestaListFragment extends ListFragment {
                         tvNom.setText(enquesta.getNom());
                 }
             }
-        });
+        });*/
 
     }
 

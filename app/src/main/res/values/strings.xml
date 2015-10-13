@@ -10,5 +10,7 @@
     <string name="seccio2">Guia</string>
     <string name="seccio3">Activitat</string>
     <string name="section_format">Estas a la secció: %1$d</string>
+    <string name="MessageProgressDialog">Please wait...</string>
+    <string name="TitleProgressDialog">Loading...</string>
 
 </resources>

@@ -7,14 +7,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvId"
+        android:id="@+id/tvTitle"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvNom"
-        android:layout_below="@+id/tvId"
+        android:id="@+id/tvSubTitle"
+        android:layout_below="@+id/tvTitle"
         />
 
 </RelativeLayout>

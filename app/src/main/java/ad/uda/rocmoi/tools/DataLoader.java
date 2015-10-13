@@ -38,7 +38,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
     //I efectuar el Parsing per obtenir un ArraList de Usuaris
     @Override
     protected ArrayList<Enquesta> doInBackground(String... params) {
-        dadesJSON=getDataDeBD();
+        dadesJSON= getDataBD();
         enquestes=parseJSON(dadesJSON);
         return enquestes;
     }
@@ -47,14 +47,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
     @Override
     protected void onPostExecute(ArrayList<Enquesta> enquestes) {
         for (Enquesta tmp : enquestes)
-            enquestes.add(tmp);
+            adaptador.add(tmp);
         Log.d("MISSATGE 7", " Tinc " + adaptador.getCount());
         adaptador.notifyDataSetChanged();
         pd.dismiss();
         super.onPostExecute(enquestes);
     }
 
-    /*@Override
+    @Override
     protected void onPreExecute() {
         // Mètode que s'executara just abans i durant doInBackGround
         // un cop finalitzat doInBackGround, s'atura.
@@ -67,21 +67,24 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         // Eliminamos el ProgressDialog.
 
         super.onPreExecute();
-    }*/
+    }
 
 
     //Connexió HTTP(php) per recuperar les dades en format JSON
-    public String getDataDeBD()  {
+    public String getDataBD()  {
         StringBuffer cadena = new StringBuffer("");
         try{
             //PHP que efectuarà el Query
-            URL url = new URL("http://exemples.ua.ad/RocMoi/SelectDossiers.php");
+            URL url = new URL("http://exemples.ua.ad/Miki/SelectDossiers.php");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            connection.setRequestProperty("Content-Type","application/json");
+            connection.setRequestProperty("Accept", "application/json");
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
+            connection.connect();
 
-            int responseCode=connection.getResponseCode();
+            String responseMessage = connection.getResponseMessage();
+            Log.d("M", "Response code " + responseMessage);
 
             //Recuperar Informació rebuda com una String amb salts de línia
             InputStream inputStream = connection.getInputStream();
@@ -105,16 +108,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         ArrayList<Enquesta> enquestes = new ArrayList<Enquesta>();
         try {
             JSONArray jArray = new JSONArray(result);
-            Log.d("MISSATGE4 ",""+jArray.length());
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json_data = jArray.getJSONObject(i);
-                Enquesta enquesta = new Enquesta(json_data.getInt("id"), json_data.getString("ref"));
+                Enquesta enquesta = new Enquesta(json_data.getInt("id"),json_data.getInt("preu"), json_data.getString("descripcio"));
 
                 enquestes.add(enquesta);
-                Log.d("MISSATGE3 ",enquesta.getNom());
             }
         } catch (JSONException e) {
-            Log.e("log_tag", "Error parsing dades " + e.toString());
+            Log.d("log_tag", "Error parsing dades " + e.toString());
         }
         return enquestes;
     }

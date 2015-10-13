@@ -50,15 +50,6 @@ public class EnquestaListActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         if (findViewById(R.id.enquesta_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -126,8 +117,7 @@ public class EnquestaListActivity extends AppCompatActivity
         return false;
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         //Envia a Activitat per realitzar enquesta
         if (keyCode == KeyEvent.KEYCODE_0 || keyCode==KeyEvent.KEYCODE_VOLUME_UP)
         {

@@ -5,18 +5,24 @@ package ad.uda.rocmoi.pojos;
  */
 public class Enquesta {
     private int id;
-    private String nom;
+    private int preu;
+    private String descripcio;
 
-    public Enquesta (int id, String nom){
+    public Enquesta (int id, int preu, String descripcio){
         this.id = id;
-        this.nom = nom;
+        this.preu = preu;
+        this.descripcio = descripcio;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNom() {
-        return nom;
+    public int getPreu() {
+        return preu;
+    }
+
+    public String getDescripcio() {
+        return descripcio;
     }
 }

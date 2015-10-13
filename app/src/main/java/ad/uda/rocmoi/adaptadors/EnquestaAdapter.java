@@ -15,39 +15,32 @@ import java.util.List;
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.pojos.Enquesta;
 
-public abstract class EnquestaAdapter extends BaseAdapter {
-    private Context contexte;
-    private int layout_list_view;
-    private ArrayList<Enquesta> enquestes;
+public class EnquestaAdapter extends ArrayAdapter<Enquesta> {
 
-    public EnquestaAdapter (Context contexte, int layout_list_view, ArrayList<Enquesta> enquestes) {
-        super();
-        this.contexte = contexte;
-        this.enquestes = enquestes;
-        this.layout_list_view = layout_list_view;
+    public EnquestaAdapter(Context context, List<Enquesta> enquestes) {
+        super(context, 0, enquestes);
     }
 
-    public int getCount() {
-        return enquestes.size();
-    }
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-    public Object getItem(int position) {
-        return enquestes.get(position);
-    }
+        //Obtenint una instància del XML per presentar les dades
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_enquesta, parent, false);
 
-    public long getItemId(int position) {
-        return position;
-    }
-
-    public View getView(int posicion, View view, ViewGroup parent) {
-        if (view == null) {
-            LayoutInflater vi = (LayoutInflater) contexte.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(layout_list_view, null);
         }
-        onEntrada(enquestes.get(posicion), view);
-        return view;
+
+        //Referencia al Camps
+        TextView tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
+        TextView tvSubTitle = (TextView)convertView.findViewById(R.id.tvSubTitle);
+
+
+
+        //Mapejar informació a mostrar a partir d'un Item
+        Enquesta e = getItem(position);
+        tvTitle.setText("Enquesta "+ String.valueOf(e.getId()));
+        tvSubTitle.setText(e.getDescripcio());
+
+        return convertView;
     }
-
-    public abstract void onEntrada(Enquesta enquesta, View view);
-
 }
