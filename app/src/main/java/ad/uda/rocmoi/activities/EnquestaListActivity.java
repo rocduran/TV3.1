@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
@@ -100,12 +102,36 @@ public class EnquestaListActivity extends AppCompatActivity
             startActivity(detailIntent);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_enviar:
+
+                break;
+            case R.id.action_sortir:
+                System.exit(0);
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
+
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         //Envia a Activitat per realitzar enquesta
         if (keyCode == KeyEvent.KEYCODE_0 || keyCode==KeyEvent.KEYCODE_VOLUME_UP)
         {
-            startActivity(new Intent("ad.uda.rocmoi.activities.Enquesta"));
+            startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
         }
 
         return false;

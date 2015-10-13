@@ -15,7 +15,7 @@ import ad.uda.rocmoi.activities.EnquestaListActivity;
 import ad.uda.rocmoi.dummy.DummyContent;
 
 /**
- * A fragment representing a single Enquesta detail screen.
+ * A fragment representing a single EnquestaActivity detail screen.
  * This fragment is either contained in a {@link EnquestaListActivity}
  * in two-pane mode (on tablets) or a {@link EnquestaDetailActivity}
  * on handsets.
