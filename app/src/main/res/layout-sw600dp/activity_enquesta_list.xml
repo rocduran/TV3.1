@@ -6,7 +6,7 @@
     android:showDividers="middle" tools:context=".EnquestaListActivity">
 
 
-    <fragment android:id="@+id/enquesta_list" android:name="ad.uda.rocmoi.EnquestaListFragment"
+    <fragment android:id="@+id/enquesta_list" android:name="ad.uda.rocmoi.fragments.EnquestaListFragment"
         android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
         tools:layout="@android:layout/list_content" />
 

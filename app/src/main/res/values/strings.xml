@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">RocMoi</string>
     <string name="title_enquesta_detail">Enquesta Detail</string>
+    <string name="action_finish">Acabar enquesta</string>
+    <string name="seccio1">Hotel</string>
+    <string name="seccio2">Guia</string>
+    <string name="seccio3">Activitat</string>
+    <string name="section_format">Estas a la secció: %1$d</string>
 </resources>
