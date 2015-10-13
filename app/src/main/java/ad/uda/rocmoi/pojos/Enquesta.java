@@ -1,5 +1,7 @@
 package ad.uda.rocmoi.pojos;
 
+import java.util.ArrayList;
+
 /**
  * Created by Moï on 12/10/2015.
  */
@@ -16,13 +18,13 @@ public class Enquesta {
      dema mi fotre si et sembla be, es llarg pro no gaire complicat,
      ara que ja tinc una mica mes de la ma el puto sql xDD
      cada una de les classes tindrie 5 instancies de la classe
-     Valoracio (amb nom y valor, valor pot ser -1 si encara no s'ha valorat)
+     Parametre (amb nom y valor, valor pot ser -1 si encara no s'ha valorat)
      crec que facilitarie bastant lo de sqlLite per guardaru en local xD
      */
 
-    private ArrayList<ValoracioHotel>();
-    private ArrayList<ValoracioGuia>();
-    private ArrayList<ValoracioActivitat>();
+    private Valoracio valoracioHotel;
+    private Valoracio valoracioGuia;
+    private Valoracio valoracioActivitat;
 
     /*
     Per guardaru en local, podriam tenir una sola instancia a memoria
@@ -40,4 +42,51 @@ public class Enquesta {
         this.activitat = activitat;
     }
 
+    public Enquesta(int id, int preu, String descripcio, String hotel, String guia, String activitat, Valoracio valoracioHotel, Valoracio valoracioGuia, Valoracio valoracioActivitat) {
+        this.id = id;
+        this.preu = preu;
+        this.descripcio = descripcio;
+        this.hotel = hotel;
+        this.guia = guia;
+        this.activitat = activitat;
+        this.valoracioHotel = valoracioHotel;
+        this.valoracioGuia = valoracioGuia;
+        this.valoracioActivitat = valoracioActivitat;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPreu() {
+        return preu;
+    }
+
+    public String getDescripcio() {
+        return descripcio;
+    }
+
+    public String getHotel() {
+        return hotel;
+    }
+
+    public String getGuia() {
+        return guia;
+    }
+
+    public String getActivitat() {
+        return activitat;
+    }
+
+    public void setValoracioHotel(Valoracio valoracioHotel) {
+        this.valoracioHotel = valoracioHotel;
+    }
+
+    public void setValoracioGuia(Valoracio valoracioGuia) {
+        this.valoracioGuia = valoracioGuia;
+    }
+
+    public void setValoracioActivitat(Valoracio valoracioActivitat) {
+        this.valoracioActivitat = valoracioActivitat;
+    }
 }

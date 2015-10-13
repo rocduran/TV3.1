@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.pojos.Enquesta;
+import ad.uda.rocmoi.pojos.Parametre;
+import ad.uda.rocmoi.pojos.Valoracio;
 
 public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
     String dadesJSON;
@@ -34,6 +36,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         this.adaptador=adaptador;
         pd = new ProgressDialog(context);
     }
+
     //Mètode per recuperar les dades al servidor
     //I efectuar el Parsing per obtenir un ArraList de Usuaris
     @Override
@@ -118,9 +121,29 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
                 String hotel = json_data.getString("hotel");
                 String guia = json_data.getString("guia");
                 String atv = json_data.getString("activitat");
+                //les valoracion venen totes en valh separades per una coma
+                //utilitzem split per a separarles
+                String aux = json_data.getString("valh");
+                String [] valh = aux.split(",");
+                //Ara creem els diferents arrays que comtindran
+                //els parametres a valorar de cada enquesta
+                Valoracio valHotel = crearValoracion(valh);
+
+                aux = json_data.getString("valg");
+                String [] valg = aux.split(",");
+                //Ara creem els diferents arrays que comtindran
+                //els parametres a valorar de cada enquesta
+                Valoracio valGuia = crearValoracion(valg);
+
+                aux = json_data.getString("vala");
+                String [] vala = aux.split(",");
+                //Ara creem els diferents arrays que comtindran
+                //els parametres a valorar de cada enquesta
+                Valoracio valAtv = crearValoracion(vala);
+
 
                 //Creem el handler i l'afegim a la llista
-                Enquesta enquesta = new Enquesta(id, preu, desc, hotel, guia, atv);
+                Enquesta enquesta = new Enquesta(id, preu, desc, hotel, guia, atv, valHotel, valGuia, valAtv);
                 enquestes.add(enquesta);
             }
         } catch (JSONException e) {
@@ -129,6 +152,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         // TODO enmagatzema la taula en la bd local, aixi quan volguem presentar els detalls d'una enquesta
         // TODO nomes hem d'accedir a la bd i carregar les dades ( aixi ens evitem de tenir la taula a memoria xD)
         return enquestes;
+    }
+
+    private Valoracio crearValoracion(String[] vals) {
+        Valoracio valoracions = new Valoracio();
+        for (int i = 0; i < vals.length; i++) {
+            valoracions.add(new Parametre(vals[i], -1));
+        }
+        return valoracions;
     }
 
 }
