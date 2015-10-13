@@ -1,4 +1,4 @@
-package ad.uda.rocmoi;
+package ad.uda.rocmoi.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.View;
+
+import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
+import ad.uda.rocmoi.fragments.EnquestaListFragment;
+import ad.uda.rocmoi.R;
 
 
 /**
@@ -101,7 +105,7 @@ public class EnquestaListActivity extends AppCompatActivity
         //Envia a Activitat per realitzar enquesta
         if (keyCode == KeyEvent.KEYCODE_0 || keyCode==KeyEvent.KEYCODE_VOLUME_UP)
         {
-            startActivity(new Intent("ad.uda.rocmoi.Enquesta"));
+            startActivity(new Intent("ad.uda.rocmoi.activities.Enquesta"));
         }
 
         return false;

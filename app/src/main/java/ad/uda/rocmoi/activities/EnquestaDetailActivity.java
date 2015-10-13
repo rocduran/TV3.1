@@ -1,4 +1,4 @@
-package ad.uda.rocmoi;
+package ad.uda.rocmoi.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.MenuItem;
+
+import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
+import ad.uda.rocmoi.R;
 
 /**
  * An activity representing a single Enquesta detail screen. This

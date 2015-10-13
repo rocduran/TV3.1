@@ -1,4 +1,4 @@
-package ad.uda.rocmoi;
+package ad.uda.rocmoi.fragments;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ad.uda.rocmoi.R;
+import ad.uda.rocmoi.activities.EnquestaDetailActivity;
+import ad.uda.rocmoi.activities.EnquestaListActivity;
 import ad.uda.rocmoi.dummy.DummyContent;
 
 /**

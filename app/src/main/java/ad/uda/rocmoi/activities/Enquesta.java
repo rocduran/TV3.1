@@ -1,4 +1,4 @@
-package ad.uda.rocmoi;
+package ad.uda.rocmoi.activities;
 
 /**
  * Created by rocduran on 12/10/15.
@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import ad.uda.rocmoi.R;
 
 
 public class Enquesta extends AppCompatActivity {
