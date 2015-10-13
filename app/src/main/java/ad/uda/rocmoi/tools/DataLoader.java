@@ -110,13 +110,24 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
             JSONArray jArray = new JSONArray(result);
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json_data = jArray.getJSONObject(i);
-                Enquesta enquesta = new Enquesta(json_data.getInt("id"),json_data.getInt("preu"), json_data.getString("descripcio"));
 
+                //Recuperem els valors del item
+                int id = json_data.getInt("id");
+                int preu = json_data.getInt("preu");
+                String desc = json_data.getString("descripcio");
+                String hotel = json_data.getString("hotel");
+                String guia = json_data.getString("guia");
+                String atv = json_data.getString("activitat");
+
+                //Creem el handler i l'afegim a la llista
+                Enquesta enquesta = new Enquesta(id, preu, desc, hotel, guia, atv);
                 enquestes.add(enquesta);
             }
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
+        // TODO enmagatzema la taula en la bd local, aixi quan volguem presentar els detalls d'una enquesta
+        // TODO nomes hem d'accedir a la bd i carregar les dades ( aixi ens evitem de tenir la taula a memoria xD)
         return enquestes;
     }
 
