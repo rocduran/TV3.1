@@ -22,11 +22,13 @@ import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.localDB.DBhelper;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Parametre;
-import ad.uda.rocmoi.pojos.Valoracio;
+import ad.uda.rocmoi.pojos.Servei;
 
 public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     String dadesJSON;
-    ArrayList enquestes;
+    public static ArrayList<Dossier> dossiers;
+    public ArrayList<Servei> serveis;
+    public ArrayList<Parametre> parametres;
     Context context;
     EnquestaAdapter adaptador;
     ProgressDialog pd;
@@ -45,19 +47,19 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     @Override
     protected ArrayList<Dossier> doInBackground(String... params) {
         dadesJSON= getDataBD();
-        enquestes=parseJSON(dadesJSON);
-        return enquestes;
+        parseJSON(dadesJSON);
+        return dossiers;
     }
     //Mètode que s'executarà després de doInBackGround
     //Amb les dades rebudes, actualitzar el adaptador per que mostri les dades
     @Override
-    protected void onPostExecute(ArrayList<Dossier> enquestes) {
-        for (Dossier tmp : enquestes)
+    protected void onPostExecute(ArrayList<Dossier> dossiers) {
+        for (Dossier tmp : dossiers)
             adaptador.add(tmp);
         Log.d("MISSATGE 7", " Tinc " + adaptador.getCount());
         adaptador.notifyDataSetChanged();
         pd.dismiss();
-        super.onPostExecute(enquestes);
+        super.onPostExecute(dossiers);
     }
 
     @Override
@@ -95,7 +97,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
             //Recuperar Informació rebuda com una String amb salts de línia
             InputStream inputStream = connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
-            String line = "";
+            String line;
             while ((line = rd.readLine()) != null) {
                 cadena.append(line);
             }
@@ -110,15 +112,39 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
 
     }
     //Conversió de JSON a taula ArrayList d'usuaris
-    public ArrayList<Dossier> parseJSON(String result) {
-        ArrayList<Dossier> enquestes = new ArrayList<Dossier>();
+    public void parseJSON(String result) {
+
         try {
             JSONObject query = new JSONObject(result);
             JSONArray json_dossier = query.getJSONArray("dossier");
-            JSONArray json_servei = query.getJSONArray("servei");
-            JSONArray json_parametre = query.getJSONArray("parametre");
+            dossiers = new ArrayList<>();
+            //Creem Array dossiers amb objectes dossier
+            for (int i= 0; i < json_dossier.length();i++){
+                JSONObject tmp = json_dossier.getJSONObject(i);
+                Dossier dossier = new Dossier(tmp.getInt("id"),tmp.getInt("preu"),tmp.getString("descripcio"));
+                dossiers.add(dossier);
+            }
 
-            Log.d("M servei", " " + json_servei.length());
+            JSONArray json_servei = query.getJSONArray("servei");
+            serveis = new ArrayList<>();
+            for (int i=0; i < json_servei.length();i++){
+                JSONObject tmp = json_servei.getJSONObject(i);
+                Servei servei = new Servei(tmp.getInt("id"),tmp.getInt("idTipus"),tmp.getString("descripcio"));
+                serveis.add(servei);
+            }
+
+            JSONArray json_parametre = query.getJSONArray("parametre");
+            parametres = new ArrayList<>();
+            for (int i=0; i < json_parametre.length();i++){
+                JSONObject tmp = json_parametre.getJSONObject(i);
+                Parametre parametre = new Parametre(tmp.getInt("id"),tmp.getInt("idTipus"),tmp.getString("descripcio"));
+                parametres.add(parametre);
+            }
+
+
+            Log.d("M dossier", " " + json_dossier);
+            Log.d("M servei", " " + json_dossier);
+            Log.d("M parametre", " " + json_dossier);
             /*for (int i = 0; i < query.length(); i++) {
 
 
@@ -152,13 +178,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
 
                 //Creem el handler i l'afegim a la llista
                 Dossier dossier = new Dossier(id, preu, desc, hotel, guia, atv, valHotel, valGuia, valAtv);
-                enquestes.add(dossier);
+                dossiers.add(dossier);
             }*/
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
-        //volquem la taula d'enquestes a la BD local
-            for (Dossier enq: enquestes) {
+        /*
+        //volquem la taula d'dossiers a la BD local
+            for (Dossier enq: dossiers) {
                 String INSERT_ENQUESTA =
                         "insert into "+ Dossier.TABLE +" values(" +
                                 enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
@@ -167,8 +194,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                         "insert into activitatDossier values(" +
                                 enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
                 database.db.execSQL(INSERT_ENQUESTA);
-            }
+            }*/
 
-        return enquestes;
     }
 }

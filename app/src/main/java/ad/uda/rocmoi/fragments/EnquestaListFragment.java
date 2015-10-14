@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
-import ad.uda.rocmoi.dummy.DummyContent;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.tools.DataLoader;
 
@@ -56,6 +55,7 @@ public class EnquestaListFragment extends ListFragment {
     public interface Callbacks {
         /**
          * Callback for when an item has been selected.
+         * @param id
          */
         public void onItemSelected(String id);
     }
@@ -92,31 +92,6 @@ public class EnquestaListFragment extends ListFragment {
         dl.execute();
         Log.d("AAAH","aH");
 
-        /*Dossier e1 = new Dossier(1, "enquesta 1");
-        Dossier e2 = new Dossier(2, "enquesta 2");
-        Dossier e3 = new Dossier(3, "enquesta 3");
-
-        enquestes = new ArrayList<Dossier>();
-        enquestes.add(e1);
-        enquestes.add(e2);
-        enquestes.add(e3);
-
-        setListAdapter(new EnquestaAdapter(getActivity(), R.layout.item_enquesta, enquestes) {
-
-            @Override
-            public void onEntrada(Dossier enquesta, View view) {
-                if (enquesta != null) {
-                    TextView tvId = (TextView) view.findViewById(R.id.tvId);
-                    if (tvId != null)
-                        tvId.setText(String.valueOf(enquesta.getId()));
-
-                    TextView tvNom = (TextView) view.findViewById(R.id.tvNom);
-                    if (tvNom != null)
-                        tvNom.setText(enquesta.getNom());
-                }
-            }
-        });*/
-
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -152,7 +127,7 @@ public class EnquestaListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(String.valueOf(DataLoader.dossiers.get(position).getId()));
     }
 
     public void onSaveInstanceState(Bundle outState) {

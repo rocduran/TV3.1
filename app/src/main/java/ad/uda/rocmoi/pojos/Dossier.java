@@ -24,6 +24,11 @@ public class Dossier {
         this.guia = guia;
         this.activitat = activitat;
     }
+    public Dossier(int id, int preu, String descripcio){
+        this.id = id;
+        this.preu = preu;
+        this.descripcio = descripcio;
+    }
 
     public int getId() {
         return id;
@@ -71,5 +76,9 @@ public class Dossier {
 
     public void setActivitat(Servei activitat) {
         this.activitat = activitat;
+    }
+
+    public String getDetails(){
+        return "Nom: " + getDescripcio() + " \n Preu: " + getPreu() + "€.";
     }
 }

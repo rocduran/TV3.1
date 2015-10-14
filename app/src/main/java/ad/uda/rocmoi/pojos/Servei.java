@@ -14,6 +14,11 @@ public class Servei {
         this.descripcio = descripcio;
         this.parametres = parametres;
     }
+    public Servei(int id, int idTipus, String descripcio) {
+        this.id = id;
+        this.idTipus = idTipus;
+        this.descripcio = descripcio;
+    }
 
     public int getId() {
         return id;
