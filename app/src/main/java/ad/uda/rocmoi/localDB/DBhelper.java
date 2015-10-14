@@ -27,17 +27,17 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + Enquesta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Enquesta.KEY_preu + " INTEGER, "
                 + Enquesta.KEY_descripcio + " TEXT, "
-                + Enquesta.KEY_hotel + " TEXT )"
+                + Enquesta.KEY_hotel + " TEXT, "
                 + Enquesta.KEY_guia + " TEXT, "
                 + Enquesta.KEY_activitat + " TEXT, "
-                + Enquesta.KEY_valoracio + "INTEGER";
+                + Enquesta.KEY_valoracio + "INTEGER)";
         // TODO pensar la millor manera per enmagatzemar les valoracions
-        String CREATE_TABLE_VALORACIONS = "CREATE TABLE " + Valoracio.TABLE +"("
+        /* String CREATE_TABLE_VALORACIONS = "CREATE TABLE " + Valoracio.TABLE +"("
                 + Valoracio.KEY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Valoracio.KEY_idEnquesta + "INTEGER ,"
 
                 ;
-
+*/
         db.execSQL(CREATE_TABLE_ENQUESTES);
 
     }

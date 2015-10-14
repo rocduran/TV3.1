@@ -78,7 +78,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         StringBuffer cadena = new StringBuffer("");
         try{
             //PHP que efectuarà el Query
-            URL url = new URL("http://exemples.ua.ad/Miki/SelectDossiers.php");
+            URL url = new URL("http://exemples.ua.ad/RocMoi/SelectDossiers2.php");
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("Content-Type","application/json");
             connection.setRequestProperty("Accept", "application/json");

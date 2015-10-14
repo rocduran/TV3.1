@@ -11,7 +11,7 @@ import java.util.HashMap;
 import ad.uda.rocmoi.pojos.Enquesta;
 
 public class EnquestaREPO {
-    private DBhelper dbHelper;
+   /* private DBhelper dbHelper;
 
     public EnquestaREPO(Context context) {
         dbHelper = new DBhelper(context);
@@ -86,7 +86,7 @@ public class EnquestaREPO {
 
     }
 
-    public Student getStudentById(int Id){
+    public Enquesta getStudentById(int Id){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Student.KEY_ID + "," +
@@ -114,5 +114,5 @@ public class EnquestaREPO {
 
         cursor.close();
         db.close();
-        return student;
+        return student;*/
     }
