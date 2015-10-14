@@ -1,15 +1,5 @@
 package ad.uda.rocmoi.localDB;
 
-import android.content.Context;
-
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import ad.uda.rocmoi.pojos.Enquesta;
-
 public class EnquestaREPO {
    /* private DBhelper dbHelper;
 
@@ -17,7 +7,7 @@ public class EnquestaREPO {
         dbHelper = new DBhelper(context);
     }
 
-    public int insert(Enquesta enquesta) {
+    public int insert(Dossier enquesta) {
 
         //Open connection to write data
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -86,7 +76,7 @@ public class EnquestaREPO {
 
     }
 
-    public Enquesta getStudentById(int Id){
+    public Dossier getStudentById(int Id){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Student.KEY_ID + "," +

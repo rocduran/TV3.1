@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.dummy.DummyContent;
-import ad.uda.rocmoi.pojos.Enquesta;
+import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.tools.DataLoader;
 
 /**
@@ -28,7 +28,7 @@ public class EnquestaListFragment extends ListFragment {
 
     ListView llista;
     EnquestaAdapter adaptador;
-    ArrayList<Enquesta> enquestes;
+    ArrayList<Dossier> enquestes;
 
 
     /**
@@ -81,7 +81,7 @@ public class EnquestaListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         //Definició dels elements necessaris
-        enquestes =new ArrayList<Enquesta>();
+        enquestes =new ArrayList<Dossier>();
 
         //Adapter (inicialment buid)
         adaptador =new EnquestaAdapter(getActivity(), enquestes);
@@ -92,11 +92,11 @@ public class EnquestaListFragment extends ListFragment {
         dl.execute();
         Log.d("AAAH","aH");
 
-        /*Enquesta e1 = new Enquesta(1, "enquesta 1");
-        Enquesta e2 = new Enquesta(2, "enquesta 2");
-        Enquesta e3 = new Enquesta(3, "enquesta 3");
+        /*Dossier e1 = new Dossier(1, "enquesta 1");
+        Dossier e2 = new Dossier(2, "enquesta 2");
+        Dossier e3 = new Dossier(3, "enquesta 3");
 
-        enquestes = new ArrayList<Enquesta>();
+        enquestes = new ArrayList<Dossier>();
         enquestes.add(e1);
         enquestes.add(e2);
         enquestes.add(e3);
@@ -104,7 +104,7 @@ public class EnquestaListFragment extends ListFragment {
         setListAdapter(new EnquestaAdapter(getActivity(), R.layout.item_enquesta, enquestes) {
 
             @Override
-            public void onEntrada(Enquesta enquesta, View view) {
+            public void onEntrada(Dossier enquesta, View view) {
                 if (enquesta != null) {
                     TextView tvId = (TextView) view.findViewById(R.id.tvId);
                     if (tvId != null)

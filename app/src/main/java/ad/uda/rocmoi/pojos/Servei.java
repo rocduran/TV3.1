@@ -1,17 +1,18 @@
 package ad.uda.rocmoi.pojos;
 
-/**
- * Created by Moï on 13/10/2015.
- */
-public class Parametre {
+import java.util.ArrayList;
+
+public class Servei {
     private int id;
     private int idTipus;
     private String descripcio;
+    private ArrayList<Parametre> parametres;
 
-    public Parametre(int id, int idTipus, String descripcio) {
+    public Servei(int id, int idTipus, String descripcio, ArrayList<Parametre> parametres) {
         this.id = id;
         this.idTipus = idTipus;
         this.descripcio = descripcio;
+        this.parametres = parametres;
     }
 
     public int getId() {
@@ -36,5 +37,13 @@ public class Parametre {
 
     public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
+    }
+
+    public ArrayList<Parametre> getParametres() {
+        return parametres;
+    }
+
+    public void setParametres(ArrayList<Parametre> parametres) {
+        this.parametres = parametres;
     }
 }

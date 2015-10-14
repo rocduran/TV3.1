@@ -1,23 +1,20 @@
 package ad.uda.rocmoi.adaptadors;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ad.uda.rocmoi.R;
-import ad.uda.rocmoi.pojos.Enquesta;
+import ad.uda.rocmoi.pojos.Dossier;
 
-public class EnquestaAdapter extends ArrayAdapter<Enquesta> {
+public class EnquestaAdapter extends ArrayAdapter<Dossier> {
 
-    public EnquestaAdapter(Context context, List<Enquesta> enquestes) {
+    public EnquestaAdapter(Context context, List<Dossier> enquestes) {
         super(context, 0, enquestes);
     }
 
@@ -37,8 +34,8 @@ public class EnquestaAdapter extends ArrayAdapter<Enquesta> {
 
 
         //Mapejar informació a mostrar a partir d'un Item
-        Enquesta e = getItem(position);
-        tvTitle.setText("Enquesta "+ String.valueOf(e.getId()));
+        Dossier e = getItem(position);
+        tvTitle.setText("Dossier "+ String.valueOf(e.getId()));
         tvSubTitle.setText(e.getDescripcio());
 
         return convertView;

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-
-import ad.uda.rocmoi.pojos.Enquesta;
+import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Valoracio;
 
 public class DBhelper  extends SQLiteOpenHelper {
@@ -27,10 +25,10 @@ public class DBhelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_TABLE_ENQUESTES = "CREATE TABLE " + Enquesta.TABLE  + "("
-                + Enquesta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + Enquesta.KEY_preu + " INTEGER, "
-                + Enquesta.KEY_descripcio + " TEXT)";
+        String CREATE_TABLE_ENQUESTES = "CREATE TABLE " + Dossier.TABLE  + "("
+                + Dossier.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Dossier.KEY_preu + " INTEGER, "
+                + Dossier.KEY_descripcio + " TEXT)";
 
         String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE activitatDossier ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -72,7 +70,7 @@ public class DBhelper  extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed, all data will be gone!!!
-        db.execSQL("DROP TABLE IF EXISTS " + Enquesta.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Dossier.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Valoracio.TABLE);
 
         // Create tables again
