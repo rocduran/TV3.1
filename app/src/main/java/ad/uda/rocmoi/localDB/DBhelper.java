@@ -27,10 +27,10 @@ public class DBhelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        /*String CREATE_TABLE_ENQUESTES = "CREATE TABLE " + Enquesta.TABLE  + "("
+        String CREATE_TABLE_ENQUESTES = "CREATE TABLE " + Enquesta.TABLE  + "("
                 + Enquesta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Enquesta.KEY_preu + " INTEGER, "
-                + Enquesta.KEY_descripcio + " TEXT)";*/
+                + Enquesta.KEY_descripcio + " TEXT)";
 
         String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE activitatDossier ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -53,14 +53,6 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + "idServei INTEGER, "
                 + "idPara INTEGER, "
                 + "valor INTEGER)";
-
-        String CREATE_TABLE_ENQUESTES = "CREATE TABLE valoracio ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + "idDossier INTEGER, "
-                + "idServei INTEGER, "
-                + "idPara INTEGER, "
-                + "valor INTEGER)";
-
 
         // TODO pensar la millor manera per enmagatzemar les valoracions
         /* String CREATE_TABLE_VALORACIONS = "CREATE TABLE " + Valoracio.TABLE +"("
