@@ -1,4 +1,4 @@
-package ad.uda.rocmoi.fragments;
+package ad.uda.rocmoi;
 
 import android.app.Activity;
 import android.os.Bundle;

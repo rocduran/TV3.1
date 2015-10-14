@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activities.EnquestaListActivity"
+            android:name=".EnquestaListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -19,20 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.EnquestaDetailActivity"
+            android:name=".EnquestaDetailActivity"
             android:label="@string/title_enquesta_detail"
-            android:parentActivityName=".activities.EnquestaListActivity"
+            android:parentActivityName=".EnquestaListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.EnquestaListActivity" />
-        </activity>
-        <activity android:name=".activities.Enquesta" >
-            <intent-filter>
-                <action android:name="ad.uda.rocmoi.Enquesta" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                android:value=".EnquestaListActivity" />
         </activity>
     </application>
 
