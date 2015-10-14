@@ -24,7 +24,7 @@ import android.widget.TextView;
 import ad.uda.rocmoi.R;
 
 
-public class Enquesta extends AppCompatActivity {
+public class EnquestaActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

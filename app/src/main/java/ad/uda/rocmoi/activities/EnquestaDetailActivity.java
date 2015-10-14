@@ -13,7 +13,7 @@ import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
 import ad.uda.rocmoi.R;
 
 /**
- * An activity representing a single Enquesta detail screen. This
+ * An activity representing a single EnquestaActivity detail screen. This
  * activity is only used on handset devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
  * in a {@link EnquestaListActivity}.
@@ -29,15 +29,6 @@ public class EnquestaDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enquesta_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

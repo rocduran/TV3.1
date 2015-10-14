@@ -3,11 +3,16 @@ package ad.uda.rocmoi.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import ad.uda.rocmoi.dummy.DummyContent;
+import java.util.ArrayList;
+
+
+import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
+import ad.uda.rocmoi.pojos.Dossier;
+import ad.uda.rocmoi.tools.DataLoader;
 
 /**
  * A list fragment representing a list of Enquestes. This fragment
@@ -19,6 +24,11 @@ import ad.uda.rocmoi.dummy.DummyContent;
  * interface.
  */
 public class EnquestaListFragment extends ListFragment {
+
+    ListView llista;
+    EnquestaAdapter adaptador;
+    ArrayList<Dossier> enquestes;
+
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -45,6 +55,7 @@ public class EnquestaListFragment extends ListFragment {
     public interface Callbacks {
         /**
          * Callback for when an item has been selected.
+         * @param id
          */
         public void onItemSelected(String id);
     }
@@ -66,19 +77,23 @@ public class EnquestaListFragment extends ListFragment {
     public EnquestaListFragment() {
     }
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        //Definició dels elements necessaris
+        enquestes =new ArrayList<Dossier>();
+
+        //Adapter (inicialment buid)
+        adaptador =new EnquestaAdapter(getActivity(), enquestes);
+        setListAdapter(adaptador);
+        //Gestor asyncron per recuperar dades i presentar la informació
+        //Quan es rebi
+        DataLoader dl = new DataLoader(getActivity(),  adaptador);
+        dl.execute();
+        Log.d("AAAH","aH");
+
     }
 
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -89,7 +104,6 @@ public class EnquestaListFragment extends ListFragment {
         }
     }
 
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
@@ -101,7 +115,6 @@ public class EnquestaListFragment extends ListFragment {
         mCallbacks = (Callbacks) activity;
     }
 
-    @Override
     public void onDetach() {
         super.onDetach();
 
@@ -109,16 +122,14 @@ public class EnquestaListFragment extends ListFragment {
         mCallbacks = sDummyCallbacks;
     }
 
-    @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(String.valueOf(DataLoader.dossiers.get(position).getId()));
     }
 
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mActivatedPosition != ListView.INVALID_POSITION) {
