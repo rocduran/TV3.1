@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
+import ad.uda.rocmoi.localDB.DBhelper;
 import ad.uda.rocmoi.pojos.Enquesta;
 import ad.uda.rocmoi.pojos.Parametre;
 import ad.uda.rocmoi.pojos.Valoracio;
@@ -29,12 +30,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
     Context context;
     EnquestaAdapter adaptador;
     ProgressDialog pd;
+    DBhelper database;
 
     //Constructor, rebem el Context i l'adaptador de Main
     public DataLoader(Context context, EnquestaAdapter adaptador) {
         this.context = context;
         this.adaptador=adaptador;
         pd = new ProgressDialog(context);
+        database = new DBhelper(context);
     }
 
     //Mètode per recuperar les dades al servidor
@@ -148,8 +151,18 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Enquesta>> {
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
-        // TODO enmagatzema la taula en la bd local, aixi quan volguem presentar els detalls d'una enquesta
-        // TODO nomes hem d'accedir a la bd i carregar les dades ( aixi ens evitem de tenir la taula a memoria xD)
+        //volquem la taula d'enquestes a la BD local
+            for (Enquesta enq: enquestes) {
+                String INSERT_ENQUESTA =
+                        "insert into "+ Enquesta.TABLE +" values(" +
+                                enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
+                database.db.execSQL(INSERT_ENQUESTA);
+                String INSERT_GUIA =
+                        "insert into activitatDossier values(" +
+                                enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
+                database.db.execSQL(INSERT_ENQUESTA);
+            }
+
         return enquestes;
     }
 

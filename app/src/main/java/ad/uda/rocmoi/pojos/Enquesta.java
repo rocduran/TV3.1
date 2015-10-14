@@ -2,14 +2,11 @@ package ad.uda.rocmoi.pojos;
 
 public class Enquesta {
     //Per a la definicio de la BD en SQLite
-    public static final String TABLE = "Enquestes";
+    public static final String TABLE = "Enquesta";
     public static final String KEY_ID = "id";
     public static String KEY_preu = "preu";
     public static String KEY_descripcio = "descripcio";
-    public static String KEY_hotel = "hotel";
-    public static String KEY_guia = "guia";
-    public static String KEY_activitat = "activitat";
-    public static String KEY_valoracio = "valoracio";
+
 
 
     //Attributs del pojo
