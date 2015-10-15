@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class EnquestaAdapter extends ArrayAdapter<Dossier> {
         }
 
         //Referencia al Camps
+        ImageView imgThubnail = (ImageView)convertView.findViewById(R.id.list_image);
         TextView tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
         TextView tvSubTitle = (TextView)convertView.findViewById(R.id.tvSubTitle);
 
@@ -35,7 +37,8 @@ public class EnquestaAdapter extends ArrayAdapter<Dossier> {
 
         //Mapejar informació a mostrar a partir d'un Item
         Dossier e = getItem(position);
-        tvTitle.setText("Dossier "+ String.valueOf(e.getId()));
+        imgThubnail.setImageResource(R.drawable.checklist);
+        tvTitle.setText(String.valueOf(e.getId()));
         tvSubTitle.setText(e.getDescripcio());
 
         return convertView;

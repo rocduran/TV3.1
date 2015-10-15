@@ -79,18 +79,17 @@ public class EnquestaListFragment extends ListFragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //Definició dels elements necessaris
-        enquestes =new ArrayList<Dossier>();
+        enquestes = new ArrayList<Dossier>();
 
         //Adapter (inicialment buid)
-        adaptador =new EnquestaAdapter(getActivity(), enquestes);
+        adaptador = new EnquestaAdapter(getActivity(), enquestes);
         setListAdapter(adaptador);
         //Gestor asyncron per recuperar dades i presentar la informació
         //Quan es rebi
-        DataLoader dl = new DataLoader(getActivity(),  adaptador);
+        DataLoader dl = new DataLoader(getActivity(), adaptador);
         dl.execute();
-        Log.d("AAAH","aH");
+        Log.d("AAAH", "aH");
 
     }
 
