@@ -65,6 +65,7 @@ public class EnquestaListActivity extends AppCompatActivity
                     .setActivateOnItemClick(true);
         }
 
+
         // TODO: If exposing deep links into your app, handle intents here.
     }
 

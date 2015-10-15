@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
-        <dex dex="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/pre-dexed/debug/classes-54ce4b9c443db9e64cee6ff81d5e9918e58280d0.jar" />
-    </item>
-    <item
         jar="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -21,6 +14,13 @@
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
         <dex dex="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-d6ab0eda316daab51139b519a2755900576c9a64.jar" />
+    </item>
+    <item
+        jar="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/pre-dexed/debug/classes-54ce4b9c443db9e64cee6ff81d5e9918e58280d0.jar" />
     </item>
     <item
         jar="/Users/rocduran/Documents/Projectes/TV3.1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
