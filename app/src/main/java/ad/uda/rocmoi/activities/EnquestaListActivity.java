@@ -44,6 +44,7 @@ public class EnquestaListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_enquesta_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -7,7 +7,7 @@
 
 
     <fragment android:id="@+id/enquesta_list" android:name="ad.uda.rocmoi.fragments.EnquestaListFragment"
-        android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+        android:layout_width="@dimen/fragment_horitzontal_width" android:layout_height="match_parent" android:layout_weight="1"
         tools:layout="@android:layout/list_content" />
 
     <FrameLayout android:id="@+id/enquesta_detail_container" android:layout_width="0dp"
