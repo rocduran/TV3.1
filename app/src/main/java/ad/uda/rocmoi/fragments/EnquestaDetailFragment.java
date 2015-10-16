@@ -1,14 +1,17 @@
 package ad.uda.rocmoi.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,7 @@ import ad.uda.rocmoi.tools.DataLoader;
  * in two-pane mode (on tablets) or a {@link EnquestaDetailActivity}
  * on handsets.
  */
-public class EnquestaDetailFragment extends Fragment {
+public class EnquestaDetailFragment extends Fragment implements View.OnClickListener{
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -48,6 +51,8 @@ public class EnquestaDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         // TODO carregar detalls des de la BD i presentarlos
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Carreguem el dossier seleccionat
@@ -55,11 +60,13 @@ public class EnquestaDetailFragment extends Fragment {
             dossier = DataLoader.dossiers.get(possicio);
 
             Activity activity = this.getActivity();
-            /*CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(dossier.getDescripcio());
-            }*/
+            }
+
         }
+
     }
 
     @Override
@@ -71,7 +78,19 @@ public class EnquestaDetailFragment extends Fragment {
         if (dossier != null) {
             ((TextView) rootView.findViewById(R.id.enquesta_detail)).setText(dossier.getDetails());
         }
+        FloatingActionButton fab_realitzar = (FloatingActionButton) rootView.findViewById(R.id.fab_realitzar);
+        fab_realitzar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View rootView) {
+                getActivity().startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
+            }
+        });
 
         return rootView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        getActivity().startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
     }
 }

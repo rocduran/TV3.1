@@ -44,6 +44,7 @@ public class EnquestaListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_enquesta_app_bar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -63,6 +64,7 @@ public class EnquestaListActivity extends AppCompatActivity
                     .findFragmentById(R.id.enquesta_list))
                     .setActivateOnItemClick(true);
         }
+
 
         // TODO: If exposing deep links into your app, handle intents here.
     }
