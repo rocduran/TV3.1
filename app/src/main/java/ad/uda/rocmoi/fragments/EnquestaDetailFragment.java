@@ -6,10 +6,15 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
@@ -72,12 +77,18 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_enquesta_detail, container, false);
+        int animShort = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        // Show the dummy content as text in a TextView.
+        View rootView = inflater.inflate(R.layout.fragment_enquesta_detail, container, false);
+        TransitionManager.beginDelayedTransition(container, new Slide(5).setDuration(animShort));
         if (dossier != null) {
             ((TextView) rootView.findViewById(R.id.enquesta_detail_titol)).setText(dossier.getDescripcio());
-            ((TextView) rootView.findViewById(R.id.enquesta_detail_preu)).setText(String.valueOf(dossier.getPreu())+"€");
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_preu)).setText(String.valueOf(dossier.getPreu()) + "€");
+
+            ((ImageView) rootView.findViewById(R.id.imatge_guia)).setImageResource(R.drawable.guia);
+            ((ImageView) rootView.findViewById(R.id.imatge_hotel)).setImageResource(R.drawable.hotel);
+            ((ImageView) rootView.findViewById(R.id.imatge_activitat)).setImageResource(R.drawable.activitat);
+
             ((TextView) rootView.findViewById(R.id.enquesta_detail_guia)).setText(dossier.getGuia().getDescripcio());
             ((TextView) rootView.findViewById(R.id.enquesta_detail_hotel)).setText(dossier.getHotel().getDescripcio());
             ((TextView) rootView.findViewById(R.id.enquesta_detail_activitat)).setText(dossier.getActivitat().getDescripcio());

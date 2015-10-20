@@ -5,6 +5,7 @@
     <dimen name="activity_horizontal_margin">64dp</dimen>
     <dimen name="fragment_horitzontal_width">0dp</dimen>
     <dimen name="vertical_serveis_margin">362dp</dimen>
+    <dimen name="vertical_serveisImg_margin">225dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="margins_title">24dp</dimen>
     <dimen name="margins_preu">64dp</dimen>

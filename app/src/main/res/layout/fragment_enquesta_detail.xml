@@ -1,7 +1,8 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:animateLayoutChanges="true" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context=".EnquestaDetailActivity" tools:ignore="MergeRootFrame">
 
@@ -20,6 +21,31 @@
         android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
         tools:context=".EnquestaDetailFragment" android:layout_margin="@dimen/margins_preu"
         android:layout_gravity="clip_horizontal" android:gravity="center_horizontal" />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:fitsSystemWindows="true"
+        android:layout_gravity="clip_horizontal"
+        android:layout_marginTop="@dimen/vertical_serveisImg_margin">
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/imatge_guia"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:padding="32dp"
+            tools:context=".EnquestaDetailFragment"  android:layout_gravity="left" android:gravity="center" />
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/imatge_hotel"
+            style="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:padding="16dp"
+            tools:context=".EnquestaDetailFragment" android:layout_gravity="center" android:gravity="center" />
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/imatge_activitat"
+            style="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:padding="32dp"
+            tools:context=".EnquestaDetailFragment" android:layout_gravity="right" android:gravity="center" />
+    </FrameLayout>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,7 +57,7 @@
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_guia"
             style="?android:attr/textAppearanceLarge" android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
+            android:layout_height="match_parent" android:padding="36dp" android:textIsSelectable="true"
             tools:context=".EnquestaDetailFragment"  android:layout_gravity="left" android:gravity="center" />
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
