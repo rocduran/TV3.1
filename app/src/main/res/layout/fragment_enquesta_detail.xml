@@ -5,12 +5,39 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context=".EnquestaDetailActivity" tools:ignore="MergeRootFrame">
 
+    <!--TODO canviar gravity + imatges-->
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_titol"
         style="?android:attr/textAppearanceLarge" android:layout_width="match_parent"
         android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
         tools:context=".EnquestaDetailFragment" android:gravity="center" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_preu"
+        style="?android:attr/textAppearanceLarge" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
+        tools:context=".EnquestaDetailFragment" android:gravity="center" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_guia"
+        style="?android:attr/textAppearanceLarge" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
+        tools:context=".EnquestaDetailFragment" android:gravity="center" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_hotel"
+        style="?android:attr/textAppearanceLarge" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
+        tools:context=".EnquestaDetailFragment" android:gravity="center" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/enquesta_detail_activitat"
+        style="?android:attr/textAppearanceLarge" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:padding="16dp" android:textIsSelectable="true"
+        tools:context=".EnquestaDetailFragment" android:gravity="center" />
+
+
 
 <!-- TODO Gravity abaix a la dreta-->
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab_realitzar"
@@ -20,5 +47,4 @@
         android:src="@android:drawable/ic_menu_edit"
         android:focusable="false"
         android:cropToPadding="false" />
-
 </FrameLayout>

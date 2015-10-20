@@ -79,6 +79,11 @@ public class Dossier {
     }
 
     public String getDetails(){
-        return "Nom: " + getDescripcio() + " \n Preu: " + getPreu() + "€.";
+        return "Id: " + id
+                + "\n Descripcio: " + descripcio
+                + " \n Preu: " + preu + "€."
+                + "\n Hotel: " + hotel.getDescripcio()
+                + "\n Guia: " + guia.getDescripcio()
+                + "\n Activitat: "+ activitat.getDescripcio();
     }
 }

@@ -1,8 +1,5 @@
 package ad.uda.rocmoi.pojos;
 
-/**
- * Created by Moï on 13/10/2015.
- */
 public class Parametre {
     private int id;
     private int idTipus;
@@ -37,4 +34,5 @@ public class Parametre {
     public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
     }
+
 }

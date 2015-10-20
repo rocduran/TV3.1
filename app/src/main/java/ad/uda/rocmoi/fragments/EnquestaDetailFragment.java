@@ -56,7 +56,7 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
         // TODO carregar detalls des de la BD i presentarlos
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Carreguem el dossier seleccionat
-            possicio = Integer.parseInt(getArguments().getString(ARG_ITEM_ID))-1;
+            possicio = Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1;
             dossier = DataLoader.dossiers.get(possicio);
 
             Activity activity = this.getActivity();
@@ -76,7 +76,11 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
 
         // Show the dummy content as text in a TextView.
         if (dossier != null) {
-            ((TextView) rootView.findViewById(R.id.enquesta_detail)).setText(dossier.getDetails());
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_titol)).setText(dossier.getDescripcio());
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_preu)).setText(String.valueOf(dossier.getPreu()));
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_guia)).setText(dossier.getGuia().getDescripcio());
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_hotel)).setText(dossier.getHotel().getDescripcio());
+            ((TextView) rootView.findViewById(R.id.enquesta_detail_activitat)).setText(dossier.getActivitat().getDescripcio());
         }
         FloatingActionButton fab_realitzar = (FloatingActionButton) rootView.findViewById(R.id.fab_realitzar);
         fab_realitzar.setOnClickListener(new View.OnClickListener() {

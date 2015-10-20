@@ -33,6 +33,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     EnquestaAdapter adaptador;
     ProgressDialog pd;
     DBhelper database;
+    private ArrayList<Parametre> llistaParametres;
 
     //Constructor, rebem el Context i l'adaptador de Main
     public DataLoader(Context context, EnquestaAdapter adaptador) {
@@ -54,6 +55,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     //Amb les dades rebudes, actualitzar el adaptador per que mostri les dades
     @Override
     protected void onPostExecute(ArrayList<Dossier> dossiers) {
+        Log.d("M", " onPostExecute");
         for (Dossier tmp : dossiers)
             adaptador.add(tmp);
         Log.d("MISSATGE 7", " Tinc " + adaptador.getCount());
@@ -80,7 +82,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
 
     //Connexió HTTP(php) per recuperar les dades en format JSON
     public String getDataBD()  {
-        StringBuffer cadena = new StringBuffer("");
+        StringBuilder cadena = new StringBuilder("");
         try{
             //PHP que efectuarà el Query
             URL url = new URL("http://exemples.ua.ad/RocMoi/SelectDossiers.php");
@@ -104,7 +106,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
 
         } catch (IOException e) {
             // Cas d'exception, mostrar el log
-            e.printStackTrace();
+            Log.d("M", "IOException " + e);
         }
         //Enviar al Log la Cadena JSON rebuda
         Log.d("******Missatge********", "\nCadena JSON : " + cadena.toString());
@@ -113,8 +115,9 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     }
     //Conversió de JSON a taula ArrayList d'usuaris
     public void parseJSON(String result) {
-
+        Log.d("M", "parsing Cadena");
         try {
+
             JSONObject query = new JSONObject(result);
             JSONArray json_dossier = query.getJSONArray("dossier");
             dossiers = new ArrayList<>();
@@ -125,15 +128,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                 dossiers.add(dossier);
             }
 
-            JSONArray json_servei = query.getJSONArray("servei");
-            serveis = new ArrayList<>();
-            for (int i=0; i < json_servei.length();i++){
-                JSONObject tmp = json_servei.getJSONObject(i);
-                Servei servei = new Servei(tmp.getInt("id"),tmp.getInt("idTipus"),tmp.getString("descripcio"));
-                serveis.add(servei);
-            }
-
-            JSONArray json_parametre = query.getJSONArray("parametre");
+            JSONArray json_parametre = query.getJSONArray("parametres");
             parametres = new ArrayList<>();
             for (int i=0; i < json_parametre.length();i++){
                 JSONObject tmp = json_parametre.getJSONObject(i);
@@ -141,45 +136,39 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                 parametres.add(parametre);
             }
 
+            JSONArray json_servei = query.getJSONArray("servei");
+            serveis = new ArrayList<>();
+            for (int i=0; i < json_servei.length();i++){
+                JSONObject tmp = json_servei.getJSONObject(i);
+                Servei servei = new Servei(tmp.getInt("id"),tmp.getInt("idTipus"),tmp.getString("descripcio"), getLlistaParametres(tmp.getInt("idTipus")));
+                serveis.add(servei);
+            }
+
+            JSONArray json_activitatDossier = query.getJSONArray("activitatdossier");
+            Log.d("M activitatDossier", " " + json_activitatDossier);
+            for (int i=0; i < json_activitatDossier.length();i++){
+                JSONObject tmp = json_activitatDossier.getJSONObject(i);
+
+                int idDossier = tmp.getInt("idDossier") -1;
+                int idServei = tmp.getInt("idServei") - 1;
+
+                if(serveis.get(idServei).getIdTipus() == 1){
+                    dossiers.get(idDossier).setGuia(serveis.get(idServei));
+                }
+
+                if(serveis.get(idServei).getIdTipus() == 2){
+                    dossiers.get(idDossier).setHotel(serveis.get(idServei));
+                }
+
+                if(serveis.get(idServei).getIdTipus() == 3){
+                    dossiers.get(idDossier).setActivitat(serveis.get(idServei));
+                }
+            }
 
             Log.d("M dossier", " " + json_dossier);
-            Log.d("M servei", " " + json_dossier);
+            Log.d("M servei", " " + json_servei);
             Log.d("M parametre", " " + json_dossier);
-            /*for (int i = 0; i < query.length(); i++) {
 
-
-                //Recuperem els valors del item
-                int id = json_data.getInt("id");
-                int preu = json_data.getInt("preu");
-                String desc = json_data.getString("descripcio");
-
-                String hotel = json_data.getString("hotel");
-                String guia = json_data.getString("guia");
-                String atv = json_data.getString("activitat");
-                //les valoracion venen totes en valh separades per una coma
-                //utilitzem split per a separarles
-                String aux = json_data.getString("valh");
-                String [] valh = aux.split(",");
-                //Ara creem els diferents arrays que comtindran
-                //els parametres a valorar de cada dossier
-                Valoracio valHotel = crearValoracion(valh);
-
-                aux = json_data.getString("valg");
-                String [] valg = aux.split(",");
-                //Ara creem els diferents arrays que comtindran
-                //els parametres a valorar de cada dossier
-                Valoracio valGuia = crearValoracion(valg);
-
-                aux = json_data.getString("vala");
-                String [] vala = aux.split(",");
-                //Ara creem els diferents arrays que comtindran
-                //els parametres a valorar de cada dossier
-                Valoracio valAtv = crearValoracion(vala);
-
-                //Creem el handler i l'afegim a la llista
-                Dossier dossier = new Dossier(id, preu, desc, hotel, guia, atv, valHotel, valGuia, valAtv);
-                dossiers.add(dossier);
-            }*/
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
@@ -196,5 +185,15 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                 database.db.execSQL(INSERT_ENQUESTA);
             }*/
 
+    }
+
+    public ArrayList<Parametre> getLlistaParametres(int tipus) {
+        llistaParametres = new ArrayList<>();
+        for (int i =0; i < parametres.size(); i++){
+            if(parametres.get(i).getIdTipus() == tipus){
+                llistaParametres.add(parametres.get(i));
+            }
+        }
+        return llistaParametres;
     }
 }
