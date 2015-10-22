@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ad.uda.rocmoi.R;
+import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
 
 
 public class EnquestaActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class EnquestaActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    public static final String ARG_ITEM_ID = "possicio";
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -161,7 +162,8 @@ public class EnquestaActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_enquesta, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getString(R.string.section_format, EnquestaDetailFragment.getPosicio()));
             return rootView;
         }
     }

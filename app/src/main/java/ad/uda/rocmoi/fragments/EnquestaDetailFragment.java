@@ -6,24 +6,18 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.transition.Fade;
 import android.transition.Slide;
-import android.transition.Transition;
 import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
-
-import java.util.ArrayList;
 
 import ad.uda.rocmoi.R;
+import ad.uda.rocmoi.activities.EnquestaActivity;
 import ad.uda.rocmoi.activities.EnquestaDetailActivity;
 import ad.uda.rocmoi.activities.EnquestaListActivity;
-import ad.uda.rocmoi.dummy.DummyContent;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.tools.DataLoader;
 
@@ -44,7 +38,12 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
      * The dummy content this fragment is presenting.
      */
     private Dossier dossier;
-    private int possicio;
+    private static int posicio;
+
+    public static int getPosicio() {
+        return posicio+1;
+    }
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -61,8 +60,8 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
         // TODO carregar detalls des de la BD i presentarlos
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Carreguem el dossier seleccionat
-            possicio = Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1;
-            dossier = DataLoader.dossiers.get(possicio);
+            posicio = Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1;
+            dossier = DataLoader.dossiers.get(posicio);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
@@ -106,6 +105,10 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        getActivity().startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
+        Intent enquestaIntent;
+        enquestaIntent = new Intent(getActivity(), EnquestaActivity.class);
+        enquestaIntent.putExtra(EnquestaActivity.ARG_ITEM_ID, posicio);
+        startActivity(enquestaIntent);
+        //getActivity().startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
     }
 }
