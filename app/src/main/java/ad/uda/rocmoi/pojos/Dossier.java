@@ -2,7 +2,7 @@ package ad.uda.rocmoi.pojos;
 
 public class Dossier {
     //Per a la definicio de la BD en SQLite
-    public static final String TABLE = "Dossier";
+    public static final String TABLE = "dossier";
     public static final String KEY_ID = "id";
     public static String KEY_preu = "preu";
     public static String KEY_descripcio = "descripcio";
@@ -15,6 +15,10 @@ public class Dossier {
     private Servei hotel;
     private Servei guia;
     private Servei activitat;
+
+    public Dossier(){
+
+    }
 
     public Dossier(int id, int preu, String descripcio, Servei hotel, Servei guia, Servei activitat) {
         this.id = id;

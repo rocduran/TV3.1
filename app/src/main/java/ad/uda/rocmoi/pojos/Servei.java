@@ -3,10 +3,20 @@ package ad.uda.rocmoi.pojos;
 import java.util.ArrayList;
 
 public class Servei {
+    //Per a la definicio de la BD en SQLite
+    public static final String TABLE = "servei";
+    public static final String KEY_ID = "id";
+    public static String KEY_idTipus = "idTipus";
+    public static String KEY_descripcio = "descripcio";
+
     private int id;
     private int idTipus;
     private String descripcio;
     private ArrayList<Parametre> parametres;
+
+    public Servei(){
+
+    }
 
     public Servei(int id, int idTipus, String descripcio, ArrayList<Parametre> parametres) {
         this.id = id;

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.localDB.DBhelper;
+import ad.uda.rocmoi.localDB.DossierRepo;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Parametre;
 import ad.uda.rocmoi.pojos.Servei;
@@ -33,7 +34,6 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     EnquestaAdapter adaptador;
     ProgressDialog pd;
     DBhelper database;
-    private ArrayList<Parametre> llistaParametres;
 
     //Constructor, rebem el Context i l'adaptador de Main
     public DataLoader(Context context, EnquestaAdapter adaptador) {
@@ -188,7 +188,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     }
 
     public ArrayList<Parametre> getLlistaParametres(int tipus) {
-        llistaParametres = new ArrayList<>();
+        ArrayList<Parametre> llistaParametres = new ArrayList<>();
         for (int i =0; i < parametres.size(); i++){
             if(parametres.get(i).getIdTipus() == tipus){
                 llistaParametres.add(parametres.get(i));

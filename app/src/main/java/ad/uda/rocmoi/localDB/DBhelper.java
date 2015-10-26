@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import ad.uda.rocmoi.pojos.ActivitatDossier;
 import ad.uda.rocmoi.pojos.Dossier;
+import ad.uda.rocmoi.pojos.Parametre;
+import ad.uda.rocmoi.pojos.Servei;
 import ad.uda.rocmoi.pojos.Valoracio;
 
 public class DBhelper  extends SQLiteOpenHelper {
@@ -30,20 +33,20 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + Dossier.KEY_preu + " INTEGER, "
                 + Dossier.KEY_descripcio + " TEXT)";
 
-        String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE activitatDossier ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + "idDossier INTEGER, "
-                + "idServei INTEGER)";
+        String CREATE_TABLE_SERVEI = "CREATE TABLE" + Servei.TABLE + "("
+                + Servei.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Servei.KEY_idTipus + " INTEGER, "
+                + Servei.KEY_descripcio + " TEXT)";
 
-        String CREATE_TABLE_SERVEI = "CREATE TABLE servei ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + "idTipus INTEGER, "
-                + "Descripcio TEXT)";
+        String CREATE_TABLE_PARAMETRES = "CREATE TABLE " + Parametre.TABLE + "("
+                + Parametre.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Parametre.KEY_idTipus + " INTEGER, "
+                + Parametre.KEY_descripcio + " TEXT)";
 
-        String CREATE_TABLE_PARAMETRES = "CREATE TABLE parametres ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + "idTipus INTEGER, "
-                + "descripcio TEXT)";
+        String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE" + ActivitatDossier.TABLE + "("
+                + ActivitatDossier.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + ActivitatDossier.KEY_idDossier + " INTEGER, "
+                + ActivitatDossier.KEY_idServei + " INTEGER)";
 
         String CREATE_TABLE_VALORACIO = "CREATE TABLE valoracio ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -52,13 +55,6 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + "idPara INTEGER, "
                 + "valor INTEGER)";
 
-        // TODO pensar la millor manera per enmagatzemar les valoracions
-        /* String CREATE_TABLE_VALORACIONS = "CREATE TABLE " + Valoracio.TABLE +"("
-                + Valoracio.KEY_ID + "INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + Valoracio.KEY_idEnquesta + "INTEGER ,"
-
-                ;
-*/
         db.execSQL(CREATE_TABLE_ENQUESTES);
         db.execSQL(CREATE_TABLE_ACTIVITATDOSSIER);
         db.execSQL(CREATE_TABLE_SERVEI);
@@ -72,6 +68,8 @@ public class DBhelper  extends SQLiteOpenHelper {
         // Drop older table if existed, all data will be gone!!!
         db.execSQL("DROP TABLE IF EXISTS " + Dossier.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Valoracio.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Servei.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Parametre.TABLE);
 
         // Create tables again
         onCreate(db);
