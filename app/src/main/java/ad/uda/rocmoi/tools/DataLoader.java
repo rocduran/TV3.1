@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.localDB.DBhelper;
+import ad.uda.rocmoi.localDB.DBinterface;
 import ad.uda.rocmoi.localDB.DossierRepo;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Parametre;
@@ -172,18 +173,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
-        /*
-        //volquem la taula d'dossiers a la BD local
-            for (Dossier enq: dossiers) {
-                String INSERT_ENQUESTA =
-                        "insert into "+ Dossier.TABLE +" values(" +
-                                enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
-                database.db.execSQL(INSERT_ENQUESTA);
-                String INSERT_GUIA =
-                        "insert into activitatDossier values(" +
-                                enq.getId() +", " + enq.getPreu() + ", " +enq.getDescripcio()+")";
-                database.db.execSQL(INSERT_ENQUESTA);
-            }*/
+        /**
+         * Test insercio dades a la bd local
+         */
+        for(int i =0; i < dossiers.size(); i++){
+            DBinterface.insert(dossiers.get(i));
+        }
+
+
 
     }
 

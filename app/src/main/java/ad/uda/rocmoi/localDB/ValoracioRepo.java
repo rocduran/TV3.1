@@ -2,11 +2,7 @@ package ad.uda.rocmoi.localDB;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Valoracio;
