@@ -161,7 +161,9 @@ public class EnquestaActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_enquesta, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            textView.setText(getString(R.string.section_format, EnquestaDetailFragment.getPosicio()));
+            int pos = EnquestaDetailFragment.getPosicio();
+
+            textView.setText(getString(R.string.section_format, pos));
             return rootView;
         }
     }

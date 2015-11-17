@@ -14,7 +14,7 @@ public class DBhelper  extends SQLiteOpenHelper {
     //version number to upgrade database version
     //each time if you Add, Edit table, you need to change the
     //version number.
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     // Database Name
     private static final String DATABASE_NAME = "moro.db";
@@ -33,7 +33,7 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + Dossier.KEY_preu + " INTEGER, "
                 + Dossier.KEY_descripcio + " TEXT)";
 
-        String CREATE_TABLE_SERVEI = "CREATE TABLE" + Servei.TABLE + "("
+        String CREATE_TABLE_SERVEI = "CREATE TABLE " + Servei.TABLE + "("
                 + Servei.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Servei.KEY_idTipus + " INTEGER, "
                 + Servei.KEY_descripcio + " TEXT)";
@@ -43,17 +43,17 @@ public class DBhelper  extends SQLiteOpenHelper {
                 + Parametre.KEY_idTipus + " INTEGER, "
                 + Parametre.KEY_descripcio + " TEXT)";
 
-        String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE" + ActivitatDossier.TABLE + "("
+        String CREATE_TABLE_ACTIVITATDOSSIER = "CREATE TABLE " + ActivitatDossier.TABLE + "("
                 + ActivitatDossier.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + ActivitatDossier.KEY_idDossier + " INTEGER, "
                 + ActivitatDossier.KEY_idServei + " INTEGER)";
 
-        String CREATE_TABLE_VALORACIO = "CREATE TABLE valoracio ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + "idDossier INTEGER, "
-                + "idServei INTEGER, "
-                + "idPara INTEGER, "
-                + "valor INTEGER)";
+        String CREATE_TABLE_VALORACIO = "CREATE TABLE " + Valoracio.TABLE + "("
+                + Valoracio.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Valoracio.KEY_idDossier + " INTEGER, "
+                + Valoracio.KEY_idServei + " INTEGER, "
+                + Valoracio.KEY_idParam + " INTEGER, "
+                + Valoracio.KEY_valor + " INTEGER)";
 
         db.execSQL(CREATE_TABLE_ENQUESTES);
         db.execSQL(CREATE_TABLE_ACTIVITATDOSSIER);
@@ -67,6 +67,7 @@ public class DBhelper  extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed, all data will be gone!!!
         db.execSQL("DROP TABLE IF EXISTS " + Dossier.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ActivitatDossier.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Valoracio.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Servei.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Parametre.TABLE);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Valoracio {
     //Per a la creacio de la BD en SQLite
-    public static final String TABLE = "Valoracio";
+    public static final String TABLE = "valoracio";
     public static final String KEY_ID = "id";
     public static final String KEY_idDossier = "idDossier";
     public static final String KEY_idServei = "idServei";

@@ -34,14 +34,14 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     Context context;
     EnquestaAdapter adaptador;
     ProgressDialog pd;
-    DBhelper database;
+    DBinterface database;
 
     //Constructor, rebem el Context i l'adaptador de Main
     public DataLoader(Context context, EnquestaAdapter adaptador) {
         this.context = context;
         this.adaptador=adaptador;
         pd = new ProgressDialog(context);
-        database = new DBhelper(context);
+        database = new DBinterface(context);
     }
 
     //Mètode per recuperar les dades al servidor
