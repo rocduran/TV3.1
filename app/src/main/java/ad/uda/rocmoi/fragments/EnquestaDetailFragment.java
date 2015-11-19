@@ -107,8 +107,7 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         Intent enquestaIntent;
         enquestaIntent = new Intent(getActivity(), EnquestaActivity.class);
-        enquestaIntent.putExtra(EnquestaActivity.ARG_ITEM_ID, posicio);
+        enquestaIntent.putExtra("id", posicio);
         startActivity(enquestaIntent);
-        //getActivity().startActivity(new Intent("ad.uda.rocmoi.activities.EnquestaActivity"));
     }
 }
