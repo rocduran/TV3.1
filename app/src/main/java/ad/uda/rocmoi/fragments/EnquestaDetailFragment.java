@@ -79,7 +79,7 @@ public class EnquestaDetailFragment extends Fragment implements View.OnClickList
         int animShort = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         View rootView = inflater.inflate(R.layout.fragment_enquesta_detail, container, false);
-        TransitionManager.beginDelayedTransition(container, new Slide(5).setDuration(animShort));
+        //TransitionManager.beginDelayedTransition(container, new Slide(5).setDuration(animShort));
         if (dossier != null) {
             ((TextView) rootView.findViewById(R.id.enquesta_detail_titol)).setText(dossier.getDescripcio());
             ((TextView) rootView.findViewById(R.id.enquesta_detail_preu)).setText(String.valueOf(dossier.getPreu()) + "€");

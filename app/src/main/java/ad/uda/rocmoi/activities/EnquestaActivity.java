@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ad.uda.rocmoi.R;
+import ad.uda.rocmoi.dummy.DummyContent;
 import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
 import ad.uda.rocmoi.fragments.EnquestaInfoFragment;
 import ad.uda.rocmoi.pojos.Dossier;
@@ -35,7 +36,7 @@ public class EnquestaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enquesta);
-        
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         setupViewPager(viewPager);
 
@@ -89,12 +90,12 @@ public class EnquestaActivity extends AppCompatActivity {
 
     public Bundle getArgsForGuia() {
         Bundle argsGuia = new Bundle();
-        Dossier d = DataLoader.dossiers.get(pos);
+        Dossier dossier = DataLoader.dossiers.get(pos);
 
         //Recuperem els parametres a valorar:
         ArrayList<String> params = new ArrayList<String>();
-        for(int i = 0; i < d.getGuia().getParametres().size(); i++){
-            params.add(d.getGuia().getParametres().get(i).getDescripcio());
+        for(int i = 0; i < dossier.getGuia().getParametres().size(); i++){
+            params.add(dossier.getGuia().getParametres().get(i).getDescripcio());
         }
 
         argsGuia.putStringArrayList("parametres", params);
@@ -104,12 +105,12 @@ public class EnquestaActivity extends AppCompatActivity {
 
     public Bundle getArgsForHotel() {
         Bundle argsHotel = new Bundle();
-        Dossier d = DataLoader.dossiers.get(pos);
+        Dossier dossier = DataLoader.dossiers.get(pos);
 
         //Recuperem els parametres a valorar:
         ArrayList<String> params = new ArrayList<String>();
-        for(int i = 0; i < d.getHotel().getParametres().size(); i++){
-            params.add(d.getHotel().getParametres().get(i).getDescripcio());
+        for(int i = 0; i < dossier.getHotel().getParametres().size(); i++){
+            params.add(dossier.getHotel().getParametres().get(i).getDescripcio());
         }
 
         argsHotel.putStringArrayList("parametres", params);
@@ -119,13 +120,13 @@ public class EnquestaActivity extends AppCompatActivity {
 
     public Bundle getArgsGorActivitat() {
         Bundle argsActivitat = new Bundle();
-        Dossier d = DataLoader.dossiers.get(pos);
+        Dossier dossier = DataLoader.dossiers.get(pos);
         argsActivitat.putString("tipus", "g");
 
         //Recuperem els parametres a valorar:
         ArrayList<String> params = new ArrayList<String>();
-        for(int i = 0; i < d.getActivitat().getParametres().size(); i++){
-            params.add(d.getActivitat().getParametres().get(i).getDescripcio());
+        for(int i = 0; i < dossier.getActivitat().getParametres().size(); i++){
+            params.add(dossier.getActivitat().getParametres().get(i).getDescripcio());
         }
 
         argsActivitat.putStringArrayList("parametres", params);

@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ad.uda.rocmoi.pojos.Dossier;
+import ad.uda.rocmoi.pojos.Parametre;
+import ad.uda.rocmoi.pojos.Servei;
+
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
@@ -12,61 +16,56 @@ import java.util.Map;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyContent {
+    private static ArrayList<Dossier> dossiers = dummyDossiers();
+    private static ArrayList<Servei> serveis = dummyServeis();
+    private static ArrayList<Parametre> parametres = dummyParametres();
 
-    /**
-     * An array of sample (dummy) items.
-     */
-    public static List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public DummyContent(){
+        setServeis();
+        setParametres();
+    }
 
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    private static ArrayList<Dossier> dummyDossiers() {
+        ArrayList<Dossier> dossiers = new ArrayList<Dossier>();
+        for(int i = 1; i < 15; i++){
+            dossiers.add(new Dossier(i, i*100, "DummyDossier " + i));
+        }
+        return dossiers;
+    }
 
-    private static final int COUNT = 25;
+    private static ArrayList<Servei> dummyServeis() {
+        ArrayList<Servei> serveis = new ArrayList<Servei>();
+        for(int i = 1; i < 4; i++){
+            serveis.add(new Servei(i, i, "DummyServei " + i));
+        }
+        return serveis;
+    }
 
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
+    private static ArrayList<Parametre> dummyParametres() {
+        ArrayList<Parametre> parametres = new ArrayList<Parametre>();
+        for(int i = 1; i < 20; i++){
+            parametres.add(new Parametre(i, i, "DummyParametre " + i));
+        }
+        return parametres;
+    }
+
+    private void setServeis() {
+        for(int i = 0; i < dossiers.size(); i++){
+            dossiers.get(i).setGuia(serveis.get(0));
+            dossiers.get(i).setHotel(serveis.get(1));
+            dossiers.get(i).setActivitat(serveis.get(2));
         }
     }
 
-    private static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+    private void setParametres() {
+        for(int i = 0; i < dossiers.size(); i++){
+            dossiers.get(i).getGuia().setParametres(parametres);
+            dossiers.get(i).getHotel().setParametres(parametres);
+            dossiers.get(i).getActivitat().setParametres(parametres);
+        }
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
-    }
-
-    /**
-     * A dummy item representing a piece of content.
-     */
-    public static class DummyItem {
-        public String id;
-        public String content;
-        public String details;
-
-        public DummyItem(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
-        }
-
-        @Override
-        public String toString() {
-            return content;
-        }
+    public static ArrayList<Dossier> getDossiers() {
+        return dossiers;
     }
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
+import ad.uda.rocmoi.dummy.DummyContent;
 import ad.uda.rocmoi.localDB.DBhelper;
 import ad.uda.rocmoi.localDB.DBinterface;
 import ad.uda.rocmoi.localDB.DossierRepo;
@@ -170,18 +171,26 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
             Log.d("M servei", " " + json_servei);
             Log.d("M parametre", " " + json_dossier);
 
+            /**
+             * Test insercio dades a la bd local
+             */
+            for(int i =0; i < dossiers.size(); i++){
+                DBinterface.insert(dossiers.get(i));
+            }
+
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
         }
+
         /**
-         * Test insercio dades a la bd local
+         * Carregar DummyContent
+         * Per si no tenim acces al server de la uni
+         * TODO borrar quan acabem la implementacio
          */
-        for(int i =0; i < dossiers.size(); i++){
-            DBinterface.insert(dossiers.get(i));
+        if (dossiers == null){
+            DummyContent dummy = new DummyContent();
+            dossiers = DummyContent.getDossiers();
         }
-
-
-
     }
 
     public ArrayList<Parametre> getLlistaParametres(int tipus) {

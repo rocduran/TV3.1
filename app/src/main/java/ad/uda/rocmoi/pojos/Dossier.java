@@ -32,6 +32,9 @@ public class Dossier {
         this.id = id;
         this.preu = preu;
         this.descripcio = descripcio;
+        this.hotel = null;
+        this.guia = null;
+        this.activitat = null;
     }
 
     public int getId() {
