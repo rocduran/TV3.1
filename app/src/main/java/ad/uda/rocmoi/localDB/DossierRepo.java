@@ -85,20 +85,20 @@ public class DossierRepo {
 
     }
 
-    public Dossier getDossierById(int Id) {
+    public Dossier getDossierById(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String selectQuery = "SELECT  " +
+        String selectQuery = "SELECT " +
                 Dossier.KEY_ID + "," +
                 Dossier.KEY_preu + "," +
-                Dossier.KEY_descripcio + "," +
+                Dossier.KEY_descripcio +
                 " FROM " + Dossier.TABLE
                 + " WHERE " +
-                Dossier.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string
+                Dossier.KEY_ID + "=?" ;// It's a good practice to use parameter ?, instead of concatenate string
 
         int iCount = 0;
         Dossier dossier = new Dossier();
 
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(Id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
             do {

@@ -15,6 +15,12 @@ public class ActivitatDossier {
 
     }
 
+    public ActivitatDossier(int id, int idDossier, int idServei){
+        this.id = id;
+        this.idDossier = idDossier;
+        this.idServei = idServei;
+    }
+
     public int getId() {
         return id;
     }

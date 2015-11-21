@@ -64,7 +64,7 @@ public class ParametreRepo {
         String selectQuery = "SELECT  " +
                 Parametre.KEY_ID + "," +
                 Parametre.KEY_idTipus + "," +
-                Parametre.KEY_descripcio + "," +
+                Parametre.KEY_descripcio +
                 " FROM " + Parametre.TABLE;
 
         //Student student = new Student();
@@ -90,12 +90,12 @@ public class ParametreRepo {
 
     }
 
-    public Parametre getStudentById(int Id) {
+    public Parametre getParametreById(int Id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery = "SELECT  " +
                 Parametre.KEY_ID + "," +
                 Parametre.KEY_idTipus + "," +
-                Parametre.KEY_descripcio + "," +
+                Parametre.KEY_descripcio +
                 " FROM " + Parametre.TABLE
                 + " WHERE " +
                 Parametre.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string

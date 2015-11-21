@@ -5,15 +5,15 @@
     <string name="action_enviar">Enviar a Server</string>
     <string name="action_sortir">Sortir</string>
 
-    <string name="action_finish">Acabar dossier</string>
+    <string name="action_finish">Acabar enquesta</string>
     <string name="seccio1">Guia</string>
     <string name="seccio2">Hotel</string>
     <string name="seccio3">Activitat</string>
     <string name="section_format">Estas a la secció: %1$d</string>
-    <string name="MessageProgressDialog">Please wait...</string>
-    <string name="TitleProgressDialog">Loading...</string>
+    <string name="MessageProgressDialog">Carregant dades...</string>
+    <string name="TitleProgressDialog">Carregat...</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 
 </resources>

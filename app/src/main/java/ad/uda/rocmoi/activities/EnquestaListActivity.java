@@ -73,9 +73,7 @@ public class EnquestaListActivity extends AppCompatActivity
             arguments.putString(EnquestaDetailFragment.ARG_ITEM_ID, id);
             EnquestaDetailFragment fragment = new EnquestaDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.enquesta_detail_container, fragment)
-                    .commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.enquesta_detail_container, fragment).commit();
 
         } else {
             // In single-pane mode, simply start the detail activity

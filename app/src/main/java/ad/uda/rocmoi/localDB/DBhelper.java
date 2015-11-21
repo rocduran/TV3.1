@@ -14,7 +14,7 @@ public class DBhelper  extends SQLiteOpenHelper {
     //version number to upgrade database version
     //each time if you Add, Edit table, you need to change the
     //version number.
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 9;
 
     // Database Name
     private static final String DATABASE_NAME = "moro.db";
@@ -65,6 +65,7 @@ public class DBhelper  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         // Drop older table if existed, all data will be gone!!!
         db.execSQL("DROP TABLE IF EXISTS " + Dossier.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ActivitatDossier.TABLE);
@@ -76,6 +77,7 @@ public class DBhelper  extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+
 
 
 }

@@ -71,9 +71,10 @@ public class EnquestaInfoFragment extends Fragment{
             ratingBar.setPadding(0, 10, 0, 0);
 
             /**
-             * Per al que fa al id, he trobat una pagina on t'ensenyen com
-             * posarli un string en comtes de un int (dema t'ho ensenyo)
-             **/
+             * TODO trobar una manera d'identificar cada ratingBar
+             * TODO (aquests surtiran a 3 fragments, aixi que
+             * TODO haurien de tenir noms diferents
+             */
 
             gridLayout.addView(txt, 500, 100);
             gridLayout.addView(ratingBar);

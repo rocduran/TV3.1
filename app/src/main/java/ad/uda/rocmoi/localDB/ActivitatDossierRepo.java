@@ -90,7 +90,7 @@ public class ActivitatDossierRepo {
 
     public ActivitatDossier getActivitatDossierById(int Id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String selectQuery = "SELECT  " +
+        String selectQuery = "SELECT " +
                 ActivitatDossier.KEY_ID + "," +
                 ActivitatDossier.KEY_idDossier + "," +
                 ActivitatDossier.KEY_idServei + "," +
@@ -115,5 +115,36 @@ public class ActivitatDossierRepo {
         cursor.close();
         db.close();
         return activitatDossier;
+    }
+
+    public ArrayList<ActivitatDossier> getActivitatDossierByIdDossier(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT " +
+                ActivitatDossier.KEY_ID + "," +
+                ActivitatDossier.KEY_idDossier + "," +
+                ActivitatDossier.KEY_idServei +
+                " FROM " + ActivitatDossier.TABLE
+                + " WHERE " +
+                ActivitatDossier.KEY_idDossier + "=?";// It's a good practice to use parameter ?, instead of concatenate string
+
+        ArrayList<ActivitatDossier> activitatsDossier = new ArrayList<ActivitatDossier>();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                ActivitatDossier activitatDossier = new ActivitatDossier();
+
+                activitatDossier.setId(cursor.getInt(cursor.getColumnIndex(ActivitatDossier.KEY_ID)));
+                activitatDossier.setIdDossier(cursor.getInt(cursor.getColumnIndex(ActivitatDossier.KEY_idDossier)));
+                activitatDossier.setIdServei(cursor.getInt(cursor.getColumnIndex(ActivitatDossier.KEY_idServei)));
+
+                activitatsDossier.add(activitatDossier);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return activitatsDossier;
     }
 }

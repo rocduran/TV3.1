@@ -45,17 +45,17 @@ public class ServeiRepo {
         db.close(); // Closing database connection
     }
 
-    public void update(Servei Servei) {
+    public void update(Servei servei) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(Servei.KEY_ID, Servei.getId());
-        values.put(Servei.KEY_idTipus, Servei.getIdTipus());
-        values.put(Servei.KEY_descripcio, Servei.getDescripcio());
+        values.put(Servei.KEY_ID, servei.getId());
+        values.put(Servei.KEY_idTipus, servei.getIdTipus());
+        values.put(Servei.KEY_descripcio, servei.getDescripcio());
 
         // It's a good practice to use parameter ?, instead of concatenate string
-        db.update(Servei.TABLE, values, Servei.KEY_ID + "= ?", new String[]{String.valueOf(Servei.getId())});
+        db.update(Servei.TABLE, values, Servei.KEY_ID + "= ?", new String[]{String.valueOf(servei.getId())});
         db.close(); // Closing database connection
     }
 
@@ -91,12 +91,12 @@ public class ServeiRepo {
 
     }
 
-    public Servei getStudentById(int Id) {
+    public Servei getServeiById(int Id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery = "SELECT  " +
                 Servei.KEY_ID + "," +
                 Servei.KEY_idTipus + "," +
-                Servei.KEY_descripcio + "," +
+                Servei.KEY_descripcio +
                 " FROM " + Servei.TABLE
                 + " WHERE " +
                 Servei.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string

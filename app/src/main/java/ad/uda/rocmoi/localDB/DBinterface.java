@@ -3,6 +3,7 @@ package ad.uda.rocmoi.localDB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
 import ad.uda.rocmoi.pojos.ActivitatDossier;
 import ad.uda.rocmoi.pojos.Dossier;
@@ -36,7 +37,7 @@ public class DBinterface {
      *
      * Tots els inserts per a cada taula de la nostra BD en local
      */
-    public static void insert(Dossier dossier) {
+    public void insert(Dossier dossier) {
         //Contenidor per preparar dades per inserció
         ContentValues values = new ContentValues();
         //Preparant body y author (Mapping)
@@ -87,6 +88,5 @@ public class DBinterface {
         //Inserir a la BD
         database.insert(Valoracio.TABLE, null, values);
     }
-
 
 }
