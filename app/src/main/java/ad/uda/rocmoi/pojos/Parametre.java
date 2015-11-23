@@ -45,4 +45,12 @@ public class Parametre {
         this.descripcio = descripcio;
     }
 
+    @Override
+    public String toString() {
+        return "Parametre{" +
+                "id=" + id +
+                ", idTipus=" + idTipus +
+                ", descripcio='" + descripcio + '\'' +
+                '}';
+    }
 }

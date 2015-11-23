@@ -3,7 +3,6 @@ package ad.uda.rocmoi.tools;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -21,23 +20,24 @@ import java.util.ArrayList;
 import ad.uda.rocmoi.R;
 import ad.uda.rocmoi.adaptadors.EnquestaAdapter;
 import ad.uda.rocmoi.dummy.DummyContent;
-import ad.uda.rocmoi.localDB.DBhelper;
 import ad.uda.rocmoi.localDB.DBinterface;
-import ad.uda.rocmoi.localDB.DossierRepo;
 import ad.uda.rocmoi.pojos.ActivitatDossier;
 import ad.uda.rocmoi.pojos.Dossier;
 import ad.uda.rocmoi.pojos.Parametre;
 import ad.uda.rocmoi.pojos.Servei;
 
 public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
-    protected String dadesJSON;
-    public static ArrayList<Dossier> dossiers;
-    public ArrayList<Servei> serveis;
-    public ArrayList<Parametre> parametres;
-    public ArrayList<ActivitatDossier> activitatDossier;
-    protected Context context;
-    protected EnquestaAdapter adaptador;
-    protected ProgressDialog pd;
+    private Context context;
+    private EnquestaAdapter adaptador;
+    private ProgressDialog pd;
+
+    private ArrayList<Dossier> dossiers;
+    private ArrayList<Servei> serveis;
+    private ArrayList<Parametre> parametres;
+    private ArrayList<ActivitatDossier> activitatDossier;
+
+    private String dadesJSON;
+
 
 
     //Constructor, rebem el Context i l'adaptador de Main
@@ -45,6 +45,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
         this.context = context;
         this.adaptador=adaptador;
         pd = new ProgressDialog(context);
+        context.deleteDatabase("moro.db");
     }
 
     //Mètode per recuperar les dades al servidor
@@ -120,7 +121,6 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
     //Conversió de JSON a taula ArrayList d'usuaris
     public void parseJSON(String result) {
         Log.d("M", "parsing Cadena");
-        DBinterface database = new DBinterface(context);
         try {
 
             JSONObject query = new JSONObject(result);
@@ -143,6 +143,7 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
 
             JSONArray json_servei = query.getJSONArray("servei");
             serveis = new ArrayList<>();
+
             for (int i=0; i < json_servei.length();i++){
                 JSONObject tmp = json_servei.getJSONObject(i);
                 Servei servei = new Servei(tmp.getInt("id"),tmp.getInt("idTipus"),tmp.getString("descripcio"), getLlistaParametres(tmp.getInt("idTipus")));
@@ -150,12 +151,16 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
             }
 
             JSONArray json_activitatDossier = query.getJSONArray("activitatdossier");
-            Log.d("M activitatDossier", " " + json_activitatDossier);
+            activitatDossier = new ArrayList<>();
             for (int i=0; i < json_activitatDossier.length();i++){
                 JSONObject tmp = json_activitatDossier.getJSONObject(i);
 
-                int idDossier = tmp.getInt("idDossier") -1;
+                int id = tmp.getInt("id");
+                int idDossier = tmp.getInt("idDossier") - 1;
                 int idServei = tmp.getInt("idServei") - 1;
+
+                ActivitatDossier a = new ActivitatDossier(id, idDossier + 1, idServei + 1);
+                activitatDossier.add(a);
 
                 if(serveis.get(idServei).getIdTipus() == 1){
                     dossiers.get(idDossier).setGuia(serveis.get(idServei));
@@ -170,17 +175,15 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                 }
             }
 
-            Log.d("M dossier", " " + json_dossier);
-            Log.d("M servei", " " + json_servei);
-            Log.d("M parametre", " " + json_dossier);
-
-            /**
-             * Test insercio dades a la bd local
-             */
+            DBinterface database = new DBinterface(context);
 
             for(int i =0; i < dossiers.size(); i++) database.insert(dossiers.get(i));
             for(int i =0; i < serveis.size(); i++) database.insert(serveis.get(i));
             for(int i =0; i < parametres.size(); i++) database.insert(parametres.get(i));
+            for(int i =0; i < activitatDossier.size(); i++) database.insert(activitatDossier.get(i));
+
+
+            Log.d("MMM", "DOSSIER LIST " + database.getDossierList());
 
         } catch (JSONException e) {
             Log.d("log_tag", "Error parsing dades " + e.toString());
@@ -191,30 +194,31 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
          * Per si no tenim acces al server de la uni
          * TODO borrar quan acabem la implementacio
          */
-        if (dossiers == null){
+        if (dossiers == null) {
             new DummyContent();
             dossiers = DummyContent.getDossiers();
             serveis = DummyContent.getServeis();
-            parametres = DummyContent.getParametres();
+            ArrayList<ArrayList<Parametre>> parametresD = DummyContent.getParametres();
             activitatDossier = DummyContent.getActivitatDossier();
+
+            DBinterface database = new DBinterface(context);
+
+            //Inserim les dades a la BD local
+            for (int i = 0; i < dossiers.size(); i++) database.insert(dossiers.get(i));
+            for (int i = 0; i < serveis.size(); i++) database.insert(serveis.get(i));
+            for (int i = 0; i < activitatDossier.size(); i++)database.insert(activitatDossier.get(i));
+
+            for (int i = 0; i < parametresD.size(); i++){
+                for(int j = 0; j < parametresD.get(i).size(); j++){
+                    database.insert(parametresD.get(i).get(j));
+                }
+            }
+
+
+            Log.d("MMM", "DOSSIER LIST " + dossiers.get(1).getId());
+            Log.d("MMM", "LOCAL DB DOSSIER LIST " + database.getDossierById(1, context).getGuia().getParametres().size());
+
         }
-
-        for(int i =0; i < dossiers.size(); i++) database.insert(dossiers.get(i));
-        for(int i =0; i < serveis.size(); i++) database.insert(serveis.get(i));
-        for(int i =0; i < parametres.size(); i++) database.insert(parametres.get(i));
-        for(int i =0; i < activitatDossier.size(); i++) database.insert(activitatDossier.get(i));
-
-        Log.d("M", "Data Directory " + Environment.getDataDirectory());
-
-        DossierRepo dossierRepo = new DossierRepo(context);
-        Dossier d = dossierRepo.getDossierById(1);
-
-        Log.d("M", "Test dossierRepo DossierGuia id 1: " + d.getGuia());
-
-
-        /**
-         * Borrar fins aqui !
-         */
     }
 
     public ArrayList<Parametre> getLlistaParametres(int tipus) {

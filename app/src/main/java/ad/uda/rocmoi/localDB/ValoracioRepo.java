@@ -18,6 +18,7 @@ public class ValoracioRepo {
 
         //Open connection to write data
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+
         ContentValues values = new ContentValues();
 
         values.put(Valoracio.KEY_ID, valoracio.getId());
@@ -32,11 +33,11 @@ public class ValoracioRepo {
         return (int) dossier_Id;
     }
 
-    public void delete(int valoracio_id) {
+    public void delete(int id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete(Valoracio.TABLE, Valoracio.KEY_ID + "= ?", new String[]{String.valueOf(valoracio_id)});
+        db.delete(Valoracio.TABLE, Valoracio.KEY_ID + "= ?", new String[]{String.valueOf(id)});
         db.close(); // Closing database connection
     }
 

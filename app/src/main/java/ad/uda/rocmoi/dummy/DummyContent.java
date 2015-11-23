@@ -19,7 +19,7 @@ import ad.uda.rocmoi.pojos.Servei;
 public class DummyContent {
     private static ArrayList<Dossier> dossiers = dummyDossiers();
     private static ArrayList<Servei> serveis = dummyServeis();
-    private static ArrayList<Parametre> parametres = dummyParametres();
+    private static ArrayList<ArrayList<Parametre>> parametres = dummyParametres();
     private static ArrayList<ActivitatDossier> activitatDossier = dummyActivitatDossiers();
 
     public DummyContent(){
@@ -57,12 +57,27 @@ public class DummyContent {
         return serveis;
     }
 
-    private static ArrayList<Parametre> dummyParametres() {
-        ArrayList<Parametre> parametres = new ArrayList<>();
+    private static ArrayList<ArrayList<Parametre>> dummyParametres() {
+        ArrayList<ArrayList<Parametre>> parametres = new ArrayList<>();
+        ArrayList<Parametre> parametresGuia = new ArrayList<>();
+        ArrayList<Parametre> parametresHotel = new ArrayList<>();
+        ArrayList<Parametre> parametresActivitat = new ArrayList<>();
 
-        for(int i = 1; i < 5; i++){
-            parametres.add(new Parametre(i, i, "DummyParametre " + i));
-        }
+        parametresGuia.add(new Parametre(1, 1, "DummyParametreGuia 1"));
+        parametresGuia.add(new Parametre(2, 1, "DummyParametreGuia 2"));
+        parametresGuia.add(new Parametre(3, 1, "DummyParametreGuia 3"));
+
+        parametresHotel.add(new Parametre(4, 2, "DummyParametreHotel 1"));
+        parametresHotel.add(new Parametre(5, 2, "DummyParametreHotel 2"));
+        parametresHotel.add(new Parametre(6, 2, "DummyParametreHotel 3"));
+
+        parametresActivitat.add(new Parametre(7, 3, "DummyParametreActivitat 1"));
+        parametresActivitat.add(new Parametre(8, 3, "DummyParametreActivitat 2"));
+        parametresActivitat.add(new Parametre(9, 3, "DummyParametreActivitat 3"));
+
+        parametres.add(parametresGuia);
+        parametres.add(parametresHotel);
+        parametres.add(parametresActivitat);
 
         return parametres;
     }
@@ -101,9 +116,9 @@ public class DummyContent {
 
     private void setParametres() {
         for(int i = 0; i < dossiers.size(); i++){
-            dossiers.get(i).getGuia().setParametres(parametres);
-            dossiers.get(i).getHotel().setParametres(parametres);
-            dossiers.get(i).getActivitat().setParametres(parametres);
+            dossiers.get(i).getGuia().setParametres(parametres.get(0));
+            dossiers.get(i).getHotel().setParametres(parametres.get(1));
+            dossiers.get(i).getActivitat().setParametres(parametres.get(2));
         }
     }
 
@@ -115,7 +130,7 @@ public class DummyContent {
         return serveis;
     }
 
-    public static ArrayList<Parametre> getParametres(){
+    public static ArrayList<ArrayList<Parametre>> getParametres(){
         return parametres;
     }
 

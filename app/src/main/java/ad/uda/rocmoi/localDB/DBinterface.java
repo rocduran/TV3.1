@@ -2,8 +2,13 @@ package ad.uda.rocmoi.localDB;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import ad.uda.rocmoi.pojos.ActivitatDossier;
 import ad.uda.rocmoi.pojos.Dossier;
@@ -13,80 +18,96 @@ import ad.uda.rocmoi.pojos.Valoracio;
 
 public class DBinterface {
     private DBhelper dBhelper;
-    private static SQLiteDatabase database;
-    private static final String STRING_TYPE = "text";
-    private static final String INT_TYPE = "integer";
+    private SQLiteDatabase database;
+    private DossierRepo dossierRepo;
+    private ActivitatDossierRepo activitatDossierRepo;
+    private ParametreRepo parametreRepo;
+    private ServeiRepo serveiRepo;
+    private ValoracioRepo valoracioRepo;
+
 
     //Constructor
     // Creant una instància cap a la BD
     public DBinterface(Context context) {
-        dBhelper = new DBhelper(context);
+        this.dBhelper = new DBhelper(context);
+        this.dossierRepo = new DossierRepo(context);
+        this.activitatDossierRepo = new ActivitatDossierRepo(context);
+        this.parametreRepo = new ParametreRepo(context);
+        this.serveiRepo = new ServeiRepo(context);
+        this.valoracioRepo = new ValoracioRepo(context);
+
         openDB();
     }
 
-    public void openDB(){
+    public void openDB() {
         database = dBhelper.getWritableDatabase();
     }
 
     //Tancar la BD
     public void closeDB() {
-        dBhelper.close();
+        database.close();
     }
 
-    /**
-     *
-     * Tots els inserts per a cada taula de la nostra BD en local
-     */
     public void insert(Dossier dossier) {
-        //Contenidor per preparar dades per inserció
-        ContentValues values = new ContentValues();
-        //Preparant body y author (Mapping)
-        values.put(Dossier.KEY_preu, dossier.getPreu());
-        values.put(Dossier.KEY_descripcio, dossier.getDescripcio());
-        //Inserir a la BD
-        database.insert(Dossier.TABLE, null, values);
+        dossierRepo.insert(dossier);
     }
 
     public void insert(Servei servei) {
-        //Contenidor per preparar dades per inserció
-        ContentValues values = new ContentValues();
-        //Preparant body y author (Mapping)
-        values.put(Servei.KEY_idTipus, servei.getIdTipus());
-        values.put(Servei.KEY_descripcio, servei.getDescripcio());
-        //Inserir a la BD
-        database.insert(Servei.TABLE, null, values);
+        serveiRepo.insert(servei);
     }
 
     public void insert(Parametre parametre) {
-        //Contenidor per preparar dades per inserció
-        ContentValues values = new ContentValues();
-        //Preparant body y author (Mapping)
-        values.put(Parametre.KEY_idTipus, parametre.getIdTipus());
-        values.put(Parametre.KEY_descripcio, parametre.getDescripcio());
-        //Inserir a la BD
-        database.insert(Parametre.TABLE, null, values);
+        parametreRepo.insert(parametre);
     }
 
     public void insert(ActivitatDossier activitatDossier) {
-        //Contenidor per preparar dades per inserció
-        ContentValues values = new ContentValues();
-        //Preparant body y author (Mapping)
-        values.put(ActivitatDossier.KEY_idDossier, activitatDossier.getIdDossier());
-        values.put(ActivitatDossier.KEY_idServei, activitatDossier.getIdServei());
-        //Inserir a la BD
-        database.insert(ActivitatDossier.TABLE, null, values);
+        activitatDossierRepo.insert(activitatDossier);
     }
 
     public void insert(Valoracio valoracio) {
-        //Contenidor per preparar dades per inserció
-        ContentValues values = new ContentValues();
-        //Preparant body y author (Mapping)
-        values.put(Valoracio.KEY_idDossier, valoracio.getIdDossier());
-        values.put(Valoracio.KEY_idServei, valoracio.getIdServei());
-        values.put(Valoracio.KEY_idParam, valoracio.getIdParam());
-        values.put(Valoracio.KEY_valor, valoracio.getValor());
-        //Inserir a la BD
-        database.insert(Valoracio.TABLE, null, values);
+        valoracioRepo.insert(valoracio);
     }
 
+    public void deleteDossier(int id){
+        dossierRepo.delete(id);
+    }
+
+    public void deleteActivitatDossier(int id){
+        activitatDossierRepo.delete(id);
+    }
+
+    public void deleteParametre(int id){
+        parametreRepo.delete(id);
+    }
+
+    public void deleteServei(int id){
+        serveiRepo.delete(id);
+    }
+
+    public void deleteValoracio(int id){
+        valoracioRepo.delete(id);
+    }
+
+    public ArrayList<Dossier> getDossierList() {
+        return dossierRepo.getDossierList();
+    }
+
+    public ArrayList<ActivitatDossier> getActivitatDossierList() {
+        return activitatDossierRepo.getActivitatDossierList();
+    }
+
+    public ArrayList<Parametre> getParametreList() {
+        return parametreRepo.getParametreList();
+    }
+
+    public ArrayList<Servei> getServeiList() {
+        return serveiRepo.getServeiList();
+    }
+
+    public Dossier getDossierById(int id, Context context){
+        Log.d("MMM","DOSSIER ID INTERFACE INT: "+id);
+        Dossier dossier = dossierRepo.getDossierById(id);
+        Log.d("MMM","DOSSIER ID INTERFACE: "+dossier.getId());
+        return dossierRepo.loadServices(dossier, context);
+    }
 }

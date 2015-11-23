@@ -20,27 +20,29 @@ public class ParametreRepo {
         dbHelper = new DBhelper(context);
     }
 
-    public int insert(Parametre parametre) {
+    public void insert(Parametre parametre) {
 
-        //Open connection to write data
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        if(getParametreById(parametre.getId()) == null){
+            //Open connection to write data
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        values.put(Parametre.KEY_ID, (parametre.getId()));
-        values.put(Parametre.KEY_idTipus, (parametre.getIdTipus()));
-        values.put(Parametre.KEY_descripcio, (parametre.getDescripcio()));
+            ContentValues values = new ContentValues();
 
-        // Inserting Row
-        long parametre_Id = db.insert(Parametre.TABLE, null, values);
-        db.close(); // Closing database connection
-        return (int) parametre_Id;
+            values.put(Parametre.KEY_ID, (parametre.getId()));
+            values.put(Parametre.KEY_idTipus, (parametre.getIdTipus()));
+            values.put(Parametre.KEY_descripcio, (parametre.getDescripcio()));
+
+            // Inserting Row
+            long parametre_Id = db.insert(Parametre.TABLE, null, values);
+            db.close(); // Closing database connection
+        }
     }
 
-    public void delete(int parametre_Id) {
+    public void delete(int id) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // It's a good practice to use parameter ?, instead of concatenate string
-        db.delete(Parametre.TABLE, Parametre.KEY_ID + "= ?", new String[]{String.valueOf(parametre_Id)});
+        db.delete(Parametre.TABLE, Parametre.KEY_ID + "= ?", new String[]{String.valueOf(id)});
         db.close(); // Closing database connection
     }
 
@@ -58,7 +60,7 @@ public class ParametreRepo {
         db.close(); // Closing database connection
     }
 
-    public ArrayList<HashMap<String, String>> getParametreList() {
+    public ArrayList<Parametre> getParametreList() {
         //Open connection to read only
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery = "SELECT  " +
@@ -67,22 +69,18 @@ public class ParametreRepo {
                 Parametre.KEY_descripcio +
                 " FROM " + Parametre.TABLE;
 
-        //Student student = new Student();
-        ArrayList<HashMap<String, String>> parametreList = new ArrayList<HashMap<String, String>>();
+        ArrayList<Parametre> parametreList = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
 
-        if (cursor.moveToFirst()) {
-            do {
-                HashMap<String, String> dossier = new HashMap<String, String>();
-                dossier.put("id", cursor.getString(cursor.getColumnIndex(Parametre.KEY_ID)));
-                dossier.put("preu", cursor.getString(cursor.getColumnIndex(Parametre.KEY_idTipus)));
-                dossier.put("descripcio", cursor.getString(cursor.getColumnIndex(Parametre.KEY_descripcio)));
-                parametreList.add(dossier);
-
-            } while (cursor.moveToNext());
-        }
+        if (cursor.moveToFirst()) do {
+            Parametre parametre = new Parametre();
+            parametre.setId(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_ID)));
+            parametre.setIdTipus(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_idTipus)));
+            parametre.setDescripcio(cursor.getString(cursor.getColumnIndex(Parametre.KEY_descripcio)));
+            parametreList.add(parametre);
+        } while (cursor.moveToNext());
 
         cursor.close();
         db.close();
@@ -90,7 +88,7 @@ public class ParametreRepo {
 
     }
 
-    public Parametre getParametreById(int Id) {
+    public Parametre getParametreById(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery = "SELECT  " +
                 Parametre.KEY_ID + "," +
@@ -100,22 +98,56 @@ public class ParametreRepo {
                 + " WHERE " +
                 Parametre.KEY_ID + "=?";// It's a good practice to use parameter ?, instead of concatenate string
 
-        int iCount = 0;
         Parametre parametre = new Parametre();
 
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(Id)});
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(id)});
 
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()){
             do {
                 parametre.setId(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_ID)));
                 parametre.setIdTipus(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_idTipus)));
                 parametre.setDescripcio(cursor.getString(cursor.getColumnIndex(Parametre.KEY_descripcio)));
+            } while (cursor.moveToNext());
+            cursor.close();
+            db.close();
+            return parametre;
+        } else{
+            cursor.close();
+            db.close();
+            return null;
+        }
+    }
+
+    public ArrayList<Parametre> getParametreByIdTipus(int idTipus) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selectQuery = "SELECT  " +
+                Parametre.KEY_ID + "," +
+                Parametre.KEY_idTipus + "," +
+                Parametre.KEY_descripcio +
+                " FROM " + Parametre.TABLE
+                + " WHERE " +
+                Parametre.KEY_idTipus + "=?";
+
+
+        ArrayList<Parametre> parametres = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(idTipus)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Parametre parametre = new Parametre();
+
+                parametre.setId(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_ID)));
+                parametre.setIdTipus(cursor.getInt(cursor.getColumnIndex(Parametre.KEY_idTipus)));
+                parametre.setDescripcio(cursor.getString(cursor.getColumnIndex(Parametre.KEY_descripcio)));
+
+                parametres.add(parametre);
 
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         db.close();
-        return parametre;
+        return parametres;
     }
 }

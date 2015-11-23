@@ -1,7 +1,6 @@
 package ad.uda.rocmoi.activities;
 
 
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,35 +10,48 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ad.uda.rocmoi.R;
-import ad.uda.rocmoi.dummy.DummyContent;
-import ad.uda.rocmoi.fragments.EnquestaDetailFragment;
 import ad.uda.rocmoi.fragments.EnquestaInfoFragment;
+import ad.uda.rocmoi.localDB.DBinterface;
+import ad.uda.rocmoi.localDB.DossierRepo;
 import ad.uda.rocmoi.pojos.Dossier;
-import ad.uda.rocmoi.tools.DataLoader;
+
 
 
 public class EnquestaActivity extends AppCompatActivity {
 
-    public int pos;
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private int pos;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private Dossier dossier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                pos = -1;
+            } else {
+                pos = extras.getInt("id");
+            }
+        } else {
+            pos = (int) savedInstanceState.getSerializable("id");
+        }
+
+        DBinterface database = new DBinterface(this);
+        dossier = database.getDossierById(pos, this);
+
         setContentView(R.layout.activity_enquesta);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -48,24 +60,7 @@ public class EnquestaActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        /**
-         * Si fem lo dels foreign keys,
-         * podem recuperar el dossier aqui
-         * i nomes hauriam de modificar 4 coses de la resta
-         * (si no fem lo dels foreign keys, o no funciones (espero que si.. xD)
-         * hem de modificar bastanta cosa (si es que ho volem fer amb la BD local clar XD)
-         *
-         */
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                pos = 0;
-            } else {
-                pos = extras.getInt("id");
-            }
-        } else {
-            pos = (int) savedInstanceState.getSerializable("id");
-        }
+        pos = getIntent().getExtras().getInt("id");
 
         FloatingActionButton fab_next = (FloatingActionButton) findViewById(R.id.fab_next);
         fab_next.setOnClickListener(new View.OnClickListener() {
@@ -102,39 +97,30 @@ public class EnquestaActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
-     *Per a recuperar els parametres de Guia, Hotel i Activitat a valorar
-     * i presentarlos en el seu corresponent fragment, el que fem es
-     * crear un Bundle per cada fragment i accedir a la taula a memoria DataLoader.dossiers
-     * a partir d'aqui carregar els parametres es facil
-     * Es la unica manera que he trobat, a mes quan tinguem la BD en local,
-     * podrem cambiar el DataLoader.dossiers.get(pos) per la query, en principi
-     * serie l'unic canvi a fer (espero vamos xD)
-     */
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         Bundle argsGuia = getArgsForGuia();
         EnquestaInfoFragment f1 = new EnquestaInfoFragment();
         f1.setArguments(argsGuia);
-        adapter.addFragment(f1, "Guia");
+        adapter.addFragment(f1, dossier.getGuia().getDescripcio());
 
         Bundle argsHotel = getArgsForHotel();
         EnquestaInfoFragment f2 = new EnquestaInfoFragment();
         f2.setArguments(argsHotel);
-        adapter.addFragment(f2, "Hotel");
+        adapter.addFragment(f2, dossier.getHotel().getDescripcio());
 
         Bundle argsActivitat = getArgsForActivitat();
         EnquestaInfoFragment f3 = new EnquestaInfoFragment();
         f3.setArguments(argsActivitat);
-        adapter.addFragment(f3, "Activitat");
+        adapter.addFragment(f3, dossier.getActivitat().getDescripcio());
 
         viewPager.setAdapter(adapter);
     }
 
     public Bundle getArgsForGuia() {
         Bundle argsGuia = new Bundle();
-        Dossier dossier = DataLoader.dossiers.get(pos);
+        //Dossier dossier = DataLoader.dossiers.get(pos);
 
         //Recuperem els parametres a valorar:
         ArrayList<String> params = new ArrayList<String>();
@@ -149,7 +135,7 @@ public class EnquestaActivity extends AppCompatActivity {
 
     public Bundle getArgsForHotel() {
         Bundle argsHotel = new Bundle();
-        Dossier dossier = DataLoader.dossiers.get(pos);
+        //Dossier dossier = DataLoader.dossiers.get(pos);
 
         //Recuperem els parametres a valorar:
         ArrayList<String> params = new ArrayList<String>();
@@ -164,7 +150,7 @@ public class EnquestaActivity extends AppCompatActivity {
 
     public Bundle getArgsForActivitat() {
         Bundle argsActivitat = new Bundle();
-        Dossier dossier = DataLoader.dossiers.get(pos);
+        //Dossier dossier = DataLoader.dossiers.get(pos);
         argsActivitat.putString("tipus", "g");
 
         //Recuperem els parametres a valorar:
