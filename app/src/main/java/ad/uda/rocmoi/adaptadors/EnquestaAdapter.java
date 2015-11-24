@@ -33,8 +33,6 @@ public class EnquestaAdapter extends ArrayAdapter<Dossier> {
         TextView tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
         TextView tvSubTitle = (TextView)convertView.findViewById(R.id.tvSubTitle);
 
-
-
         //Mapejar informació a mostrar a partir d'un Item
         Dossier e = getItem(position);
         imgThubnail.setImageResource(R.drawable.checklist);

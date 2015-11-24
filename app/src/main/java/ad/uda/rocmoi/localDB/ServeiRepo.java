@@ -72,7 +72,7 @@ public class ServeiRepo {
                 " FROM " + Servei.TABLE;
 
         //Student student = new Student();
-        ArrayList<Servei> ServeiList = new ArrayList<>();
+        ArrayList<Servei> serveiList = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -82,13 +82,13 @@ public class ServeiRepo {
             servei.setId(cursor.getInt(cursor.getColumnIndex(Servei.KEY_ID)));
             servei.setIdTipus(cursor.getInt(cursor.getColumnIndex(Servei.KEY_idTipus)));
             servei.setDescripcio(cursor.getString(cursor.getColumnIndex(Servei.KEY_descripcio)));
-            ServeiList.add(servei);
+            serveiList.add(servei);
 
         } while (cursor.moveToNext());
 
         cursor.close();
         db.close();
-        return ServeiList;
+        return serveiList;
 
     }
 

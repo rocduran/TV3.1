@@ -213,11 +213,6 @@ public class DataLoader extends AsyncTask<String, Void, ArrayList<Dossier>> {
                     database.insert(parametresD.get(i).get(j));
                 }
             }
-
-
-            Log.d("MMM", "DOSSIER LIST " + dossiers.get(1).getId());
-            Log.d("MMM", "LOCAL DB DOSSIER LIST " + database.getDossierById(1, context).getGuia().getParametres().size());
-
         }
     }
 

@@ -39,9 +39,7 @@ public class DBinterface {
         openDB();
     }
 
-    public void openDB() {
-        database = dBhelper.getWritableDatabase();
-    }
+    public void openDB() {database = dBhelper.getWritableDatabase();}
 
     //Tancar la BD
     public void closeDB() {
@@ -60,54 +58,36 @@ public class DBinterface {
         parametreRepo.insert(parametre);
     }
 
-    public void insert(ActivitatDossier activitatDossier) {
-        activitatDossierRepo.insert(activitatDossier);
-    }
+    public void insert(ActivitatDossier activitatDossier) {activitatDossierRepo.insert(activitatDossier);}
 
-    public void insert(Valoracio valoracio) {
-        valoracioRepo.insert(valoracio);
-    }
+    public void insert(Valoracio valoracio) {valoracioRepo.insert(valoracio);}
 
-    public void deleteDossier(int id){
-        dossierRepo.delete(id);
-    }
+    public void deleteDossier(int id){dossierRepo.delete(id);}
 
-    public void deleteActivitatDossier(int id){
-        activitatDossierRepo.delete(id);
-    }
+    public void deleteActivitatDossier(int id){activitatDossierRepo.delete(id);}
 
-    public void deleteParametre(int id){
-        parametreRepo.delete(id);
-    }
+    public void deleteParametre(int id){parametreRepo.delete(id);}
 
-    public void deleteServei(int id){
-        serveiRepo.delete(id);
-    }
+    public void deleteServei(int id){serveiRepo.delete(id);}
 
-    public void deleteValoracio(int id){
-        valoracioRepo.delete(id);
-    }
+    public void deleteValoracio(int id){valoracioRepo.delete(id);}
 
-    public ArrayList<Dossier> getDossierList() {
-        return dossierRepo.getDossierList();
-    }
+    public ArrayList<Dossier> getDossierList() {return dossierRepo.getDossierList();}
 
-    public ArrayList<ActivitatDossier> getActivitatDossierList() {
-        return activitatDossierRepo.getActivitatDossierList();
-    }
+    public ArrayList<ActivitatDossier> getActivitatDossierList() {return activitatDossierRepo.getActivitatDossierList();}
 
-    public ArrayList<Parametre> getParametreList() {
-        return parametreRepo.getParametreList();
-    }
+    public ArrayList<Parametre> getParametreList() {return parametreRepo.getParametreList();}
 
     public ArrayList<Servei> getServeiList() {
         return serveiRepo.getServeiList();
     }
 
+    public ArrayList<Valoracio> getValoracioList() {return valoracioRepo.getValoracioList();}
+
     public Dossier getDossierById(int id, Context context){
-        Log.d("MMM","DOSSIER ID INTERFACE INT: "+id);
         Dossier dossier = dossierRepo.getDossierById(id);
-        Log.d("MMM","DOSSIER ID INTERFACE: "+dossier.getId());
         return dossierRepo.loadServices(dossier, context);
     }
+
+
 }

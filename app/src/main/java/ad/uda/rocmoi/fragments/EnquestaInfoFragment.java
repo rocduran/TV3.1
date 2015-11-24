@@ -3,6 +3,7 @@ package ad.uda.rocmoi.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -11,10 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ad.uda.rocmoi.pojos.Valoracio;
+import ad.uda.rocmoi.widgets.ValBar;
+
 public class EnquestaInfoFragment extends Fragment{
+
+    private ArrayList<Valoracio> valoracions;
+    private ArrayList<ValBar> valBars;
 
     public EnquestaInfoFragment() {
         //Required empty public constructor
@@ -27,11 +35,14 @@ public class EnquestaInfoFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        /**
-         * Basicament, en l'array params tenims tots els parametres d'un
-         * servei a valorar, ja sigui Guia, Hotel o Activitat
-         */
+
+        int idDossier = this.getArguments().getInt("idDossier");
+        int idServei = this.getArguments().getInt("idServei");
+
         ArrayList<String> params = this.getArguments().getStringArrayList("parametres");
+        ArrayList<Integer> paramsId = this.getArguments().getIntegerArrayList("parametresId");
+
+        valoracions = new ArrayList<>();
 
         /**
          * ScrollView per si tenim mes de 5 parametres
@@ -55,33 +66,20 @@ public class EnquestaInfoFragment extends Fragment{
             txt = new TextView(getContext());
             txt.setText(params.get(i));
             txt.setTextSize(22);
-            txt.setPadding(0,10,0,0);
+            txt.setPadding(0, 10, 0, 0);
 
-            ViewGroup.LayoutParams ratingBarLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                                                  ViewGroup.LayoutParams.WRAP_CONTENT);
+            Valoracio valoracio = new Valoracio(idDossier, idServei, paramsId.get(i));
+            ValBar valBar = new ValBar(getActivity(), valoracio);
+            valoracions.add(valoracio);
 
-            RatingBar ratingBar = new RatingBar(getContext());
-            ratingBar.setLayoutParams(ratingBarLayoutParams);
-            ratingBar.setStepSize(1);
-            ratingBar.setMax(5);
-            ratingBar.setNumStars(5);
-            ratingBar.setMinimumHeight(100);
-            ratingBar.setScaleX((float) 1.5);
-            ratingBar.setScaleY((float) 1.5);
-            ratingBar.setPadding(0, 10, 0, 0);
-
-            /**
-             * TODO trobar una manera d'identificar cada ratingBar
-             * TODO (aquests surtiran a 3 fragments, aixi que
-             * TODO haurien de tenir noms diferents
-             */
-
-            gridLayout.addView(txt, 500, 100);
-            gridLayout.addView(ratingBar);
-
+            gridLayout.addView(txt,500,100);
+            gridLayout.addView(valBar.getRatingBar());
         }
 
-        return scrollView;
+            return scrollView;
     }
 
+    public ArrayList<Valoracio> getValoracions(){
+        return this.valoracions;
+    }
 }

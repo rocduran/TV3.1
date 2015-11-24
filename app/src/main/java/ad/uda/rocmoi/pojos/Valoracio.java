@@ -19,6 +19,12 @@ public class Valoracio {
 
     public Valoracio(){}
 
+    public Valoracio(int idDossier, int idServei, int idParam) {
+        this.idDossier = idDossier;
+        this.idServei = idServei;
+        this.idParam = idParam;
+    }
+
     public int getId() {
         return id;
     }
@@ -59,7 +65,17 @@ public class Valoracio {
         this.valor = valor;
     }
 
-    /**
+    @Override
+    public String toString() {
+        return "Valoracio{" +
+                "id=" + id +
+                ", idDossier=" + idDossier +
+                ", idServei=" + idServei +
+                ", idParam=" + idParam +
+                ", valor=" + valor +
+                '}';
+    }
+/**
      * Per si ens interessa carregar les valoracions que hi ha
      * guardades al servidor (mes endavant pot ser)
      */
